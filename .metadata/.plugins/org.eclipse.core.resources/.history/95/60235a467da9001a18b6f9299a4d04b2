@@ -1,0 +1,13 @@
+package com.mvc.jigulyeog.model.dao;
+
+import org.springframework.stereotype.Repository;
+
+import com.mvc.jigulyeog.model.dto.UserDto;
+
+@Repository
+public class TestDao {
+	public UserDto test() {
+		
+	}
+	
+}
