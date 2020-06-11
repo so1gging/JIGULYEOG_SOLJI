@@ -1,0 +1,7 @@
+package com.mvc.jigulyeog.model.dao;
+
+public interface ProjectDao {
+
+	String NAMESPACE = "mapper.project.";
+	
+}

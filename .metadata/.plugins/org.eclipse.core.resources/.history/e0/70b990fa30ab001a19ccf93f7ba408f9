@@ -1,0 +1,57 @@
+package com.mvc.jigulyeog.model.dto;
+
+import java.util.Date;
+
+public class CheerMessageDto {
+	private int chher_num;
+	private int pro_num;
+	private String user_id;
+	private String chher_content;
+	private Date cheer_date;
+	
+	public CheerMessageDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public CheerMessageDto(int chher_num, int pro_num, String user_id, String chher_content, Date cheer_date) {
+		super();
+		this.chher_num = chher_num;
+		this.pro_num = pro_num;
+		this.user_id = user_id;
+		this.chher_content = chher_content;
+		this.cheer_date = cheer_date;
+	}
+	public int getChher_num() {
+		return chher_num;
+	}
+	public void setChher_num(int chher_num) {
+		this.chher_num = chher_num;
+	}
+	public int getPro_num() {
+		return pro_num;
+	}
+	public void setPro_num(int pro_num) {
+		this.pro_num = pro_num;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getChher_content() {
+		return chher_content;
+	}
+	public void setChher_content(String chher_content) {
+		this.chher_content = chher_content;
+	}
+	public Date getCheer_date() {
+		return cheer_date;
+	}
+	public void setCheer_date(Date cheer_date) {
+		this.cheer_date = cheer_date;
+	}
+
+	
+	
+}

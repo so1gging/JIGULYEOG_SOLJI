@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>지구력</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500|Gaegu:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/personal_css/payment_page/paypage_style.css">
+    <link rel="icon" href="images/ficon.png">
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/jejugothic.css">
+    <style>
+      body{
+        font-family: 'Poppins','Jeju Gothic', serif;
+      }
+    </style>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  <!-- iamport.payment.js -->
+  <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+        <script type="text/javascript">
+
+            $(function(){
+                var IMP = window.IMP;
+    	        IMP.init('imp59305349');
+    	        var msg;
+    	        var pub_pay_uid;
+
+                $(".donatebtn").click(function(){
+                    var d_name = $('#donateName').val();
+                    var d_email = $('#donateEmail').val();
+                    var d_addr = $('#donateAddr').val();
+                    var d_tel = $('#donateTel').val();
+
+                        if(d_name==""||d_email==""||d_addr==""||d_tel==""){
+                            alert("기부자 정보를 모두 입력해주세요.");
+                            return false;
+                        }
+
+                        var payVal = $('input[name="rdo_pay"]:checked').val();
+                    
+                    if(payVal==null){
+                        alert("결제수단을 입력해주세요.");
+                        return false;
+                    }
+                    var money = $('input[name="doMoney"]').val();
+                    if(money==""){
+                        alert("기부 금액을 입력하세요.");
+                        return false;                     
+                    }
+
+                    if($("input:checkbox[name=complete_yn]").is(":checked") == false){
+                        alert("약관에 동의해주세요.");
+                        return false;   
+                    }
+
+                    IMP.request_pay({
+                        pg : 'html5_inicis', // version 1.1.0부터 지원.
+                        pay_method : payVal,
+                        merchant_uid : 'merchant_' + new Date().getTime(),
+                        name : '프로젝트 이름 기부',
+                        amount : money, //판매 가격
+                        buyer_email : d_email,
+                        buyer_name : d_name,
+                        buyer_tel : d_addr,
+                        buyer_addr : d_tel
+                    }, function(rsp) {
+                        if ( rsp.success ) {
+                            var msg = '결제가 완료되었습니다.';
+                            msg += '고유ID : ' + rsp.imp_uid;
+                            msg += '상점 거래ID : ' + rsp.merchant_uid;
+                            msg += '결제 금액 : ' + rsp.paid_amount;
+                            msg += '카드 승인번호 : ' + rsp.apply_num;
+                        } else {
+                            var msg = '결제에 실패하였습니다.';
+                            msg += '에러내용 : ' + rsp.error_msg;
+                        }
+                        alert(msg);
+                    });
+                });
+            });
+
+        </script>
+
+  </head>
+
+
+
+
+  <body>
+    
+  <!----------------- START nav ----------------->  
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><img src="images/back_logo.png" alt="logo"class="headerclogo"  width="45px" height="45px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="donate.html" class="nav-link">환경단체</a></li>
+          <li class="nav-item active"><a href="gallery.html" class="nav-link">프로젝트</a></li>
+          <li class="nav-item"><a href="blog.html" class="nav-link">청원</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">함께해요</a></li>
+          <li class="nav-item"><a href="contact.html" class="nav-link">로그인</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!----------------- END nav ----------------->
+  
+  <div class="block-31" style="position: relative;">
+    <div class="owl-carousel loop-block-31 ">
+      <div class="block-30 block-30-sm item" style="background-image: url('images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-md-7 text-center">
+              <h2 class="heading">Payment</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="steps">
+                <li class="on fleft" id="stepslijs1"><b>01</b>기부 신청서 작성</li>
+                <img src="css/personal_css/payment_page/pay_icon_next.png">
+                <li class="fleft" id="stepslijs2"><b>02</b>기부완료</li>
+            </div>
+
+            <div class="row mt-3 rootForm">
+                <!--projectinfo-->
+                <div class="col-md-4">
+                    <div class="projectinfo">
+                        <div class="card fundraise-item mb-5">
+                            <a href="#"><img class="card-img-top" src="images/img_1.jpg" alt="Image placeholder"></a>
+                            <div class="card-body">
+                              <h3 class="card-title"><a href="#">프로젝트 이름</a></h3>
+                              <span class="donation-time mb-3 d-block">작성자 2020/06/05</span>
+                              <div class="progress custom-progress-success">
+                                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div>
+                              <span class="fund-raised d-block">$8,100 raised of $30,000</span>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
+
+
+                <div class="col-md-8">
+                    <div class="donateForm">
+                        <h4>기부자 정보</h4>
+                        <form>
+                            <input type="text" class="form-control" id="donateName" value="김솔지"><br>
+                            <input type="email" class="form-control" id="donateEmail" value="999rty@naver.com"><br>
+                            <input type="text" class="form-control" id="donateAddr" value="경기도 용인시 중부대로 747번길"><br>
+                            <input type="tel" class="form-control" id="donateTel" value="01048547484"><br>
+                        </form>
+        
+                        <div class="mt-4">
+                            <h4>결제수단</h4>
+                        </div>
+        
+                        <div class="conchk">
+                            <div class="con-row">
+                                <label><input type="radio" name="rdo_pay" value="card">신용카드</label>
+                            </div>
+                            <div class="con-row">
+                                <label><input type="radio" name="rdo_pay" value="trans">실시간 계좌이체</label>
+                            </div>
+                            <div class="con-row">
+                                <label><input type="radio" name="rdo_pay" value="phone">휴대폰 소액결제</label>
+                            </div>
+                            <div class="con-row">
+                                <label><input type="radio" name="rdo_pay" value="vbank">무통장 입금</label>
+                            </div> 
+                        </div>
+
+                        <div class="donatemoney mt-3">
+                            <h4>기부 금액</h4>
+                            <input type="number" name="doMoney" placeholder="기부금액을 입력하세요">
+                        </div>
+                        <hr>
+                        <div class="donatechk">
+                            <input type="checkbox" name="complete_yn"> 알맞은 기부자 정보와 결제수단을 입력하셨습니까? <br>
+                            <span style="color: #999999;"> 확인 후, 밑의 [기부하기] 버튼을 눌러주시면, 바로 결제 기부하실 수 있습니다. </span>
+                        </div>
+                        <div class="donatebtnform">
+                            <input type="button" class="btn btn-success donatebtn"  value="기부하기">
+                        </div>
+        
+                    <div>
+        
+        
+            </div>
+        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+  
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-6 col-lg-4">
+          <h3 class="heading-section">About Us</h3>
+          <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+          <p><a href="#" class="btn btn-primary px-4 py-3">Join Volunteer</a></p>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <h3 class="heading-section">Blog</h3>
+          <div class="block-21 d-flex mb-4">
+            <figure class="mr-3">
+              <img src="images/img_1.jpg" alt="" class="img-fluid">
+            </figure>
+            <div class="text">
+              <h3 class="heading"><a href="#">Give Meal A Day</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> July 29, 2018</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block-21 d-flex mb-4">
+            <figure class="mr-3">
+              <img src="images/img_2.jpg" alt="" class="img-fluid">
+            </figure>
+            <div class="text">
+              <h3 class="heading"><a href="#">Free Education For African Children</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> July 29, 2018</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="block-21 d-flex mb-4">
+            <figure class="mr-3">
+              <img src="images/img_4.jpg" alt="" class="img-fluid">
+            </figure>
+            <div class="text">
+              <h3 class="heading"><a href="#">Join As A Volunteers</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> July 29, 2018</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="block-23">
+            <h3 class="heading-section">Contact Info</h3>
+              <ul>
+                <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
+                <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                <li><span class="icon icon-clock-o"></span><span class="text">Monday &mdash; Friday 8:00am - 5:00pm</span></li>
+              </ul>
+            </div>
+        </div>
+        
+        
+      </div>
+      <div class="row pt-5">
+        <div class="col-md-12 text-center">
+          <p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" class="text-primary">Colorlib</a>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src="js/main.js"></script>
+    
+  </body>
+</html>

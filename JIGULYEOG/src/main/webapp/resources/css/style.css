@@ -8694,16 +8694,25 @@ textarea.form-control {
       content: ""; }
   .block-30 .heading {
     color: #fff;
-    font-size: 40px;
+    font-size: 100px;
     line-height: 1.1;
+    margin-top: 30px;
     margin-bottom: 50px;
-    font-family: "Gaegu", cursive; }
+    letter-spacing: 2px;
+    font-family: 'Caveat','East Sea Dokdo', cursive;
+    /* font-family: "Gaegu", cursive; */ }
     @media (min-width: 768px) {
       .block-30 .heading {
-        font-size: 80px; } }
+        font-size: 100px; } }
     @media (min-width: 992px) {
       .block-30 .heading {
-        font-size: 80px; } }
+        margin-top: 35px;
+        font-size: 100px; } }
+    @media (min-width: 1624px) {
+          .block-30 .heading {
+            margin-top: 35px;
+            font-size: 140px; } }
+
   .block-30 .btn {
     background: #fff;
     border-radius: 0;

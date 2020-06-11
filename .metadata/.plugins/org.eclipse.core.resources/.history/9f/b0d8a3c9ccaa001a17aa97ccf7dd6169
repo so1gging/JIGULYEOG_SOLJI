@@ -1,0 +1,17 @@
+package com.mvc.jigulyeog.model.dto;
+
+public class PageMaker {
+	private final static int displayBlockNum = 5; // 페이지 블럭 개수 << [<] [1] [2] [3] [4] [5] [>] >> 일 때, 5 
+	private int startPage = 1; // 페이지 블럭에 출력 될 시작 페이지
+	private int endPage; // 페이지 블럭에 출력 될 마지막 페이지
+	private boolean prev; //이전
+	private boolean next; //다음
+	private Paging paging;
+	
+	public void setPaging(Paging paging) {
+		
+	}
+	
+	
+
+}

@@ -1,0 +1,24 @@
+package com.mvc.jigulyeog.biz;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.mvc.jigulyeog.model.dao.CheerMessageDao;
+import com.mvc.jigulyeog.model.dto.Paging;
+
+@Service
+public class CheerMessageBizImpl implements CheerMessageBiz{
+	@Autowired
+	CheerMessageDao dao;
+
+	@Override
+	public int totalArtice(int pro_num) {
+		return dao.totalArticle(pro_num);
+	}
+
+	@Override
+	public Paging cheerMsgPaging(Integer page) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

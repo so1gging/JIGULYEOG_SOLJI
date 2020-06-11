@@ -1,0 +1,15 @@
+
+6월 11, 2020 01:02:03.77 NEW SESSION
+6월 11, 2020 01:02:03.78 [15912:12472:0611/010203.764:ERROR:socket_stream.cc(218)] Closing stream with result -2
+
+6월 11, 2020 11:52:34.02 NEW SESSION
+6월 11, 2020 11:52:34.02 [14784:7864:0611/115234.020:ERROR:get_updates_processor.cc(258)] PostClientToServerMessage() failed during GetUpdates with error 2
+6월 11, 2020 11:54:02.15 [14784:7864:0611/115402.156:ERROR:get_updates_processor.cc(258)] PostClientToServerMessage() failed during GetUpdates with error 2
+6월 11, 2020 11:56:39.78 [14784:8460:0611/115639.788:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+6월 11, 2020 11:57:07.37 [14784:8460:0611/115707.370:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+6월 11, 2020 11:57:07.39 [14784:7864:0611/115707.372:ERROR:get_updates_processor.cc(258)] PostClientToServerMessage() failed during GetUpdates with error 2
+6월 11, 2020 11:57:09.16 [14784:7864:0611/115709.160:ERROR:get_updates_processor.cc(258)] PostClientToServerMessage() failed during GetUpdates with error 2
+6월 11, 2020 11:57:13.78 [14784:7864:0611/115713.787:ERROR:get_updates_processor.cc(258)] PostClientToServerMessage() failed during GetUpdates with error 2
+
+6월 11, 2020 18:56:49.30 NEW SESSION
+6월 11, 2020 18:56:49.30 [9008:2604:0611/185649.298:ERROR:backend_impl.cc(1041)] Critical error found -8

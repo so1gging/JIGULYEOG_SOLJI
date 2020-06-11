@@ -1,0 +1,10 @@
+package com.mvc.jigulyeog.biz;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public interface ProjectBiz {
+	String fileUpload(HttpServletRequest req,HttpServletResponse res,MultipartFile upload);
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.cheerMessage">
+	
+	<select id="totalArticle" resultType="int" parameterType="int">
+		SELECT COUNT(*)
+		FROM CHEER_MESSAGE
+		WHERE PRO_NUM = #{pro_num}
+	</select>	
+	
+	<select id="getCheerMessageOne" resultType="CheerMessageDto" parameterType="int">
+		SELECT *
+		FROM CHEER_MESSAGE
+		WHERE PRO_NUM = #{pro_num}
+		ORDER BY CHEER_NUM DESC
+	</select>
+
+	
+</mapper>

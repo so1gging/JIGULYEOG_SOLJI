@@ -1,0 +1,7 @@
+package com.mvc.jigulyeog.biz;
+
+
+
+public interface ProjectBiz {
+
+}

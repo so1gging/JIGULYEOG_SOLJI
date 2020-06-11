@@ -6,12 +6,15 @@
 <configuration>
 	<!-- 별칭 설정 -->
 	<typeAliases>
-		<!-- <typeAlias type="com.mvc.jigulyeog.model.dto.UserDto" alias="UserDto"/>  -->
+		<typeAlias type="com.mvc.jigulyeog.model.dto.ProjectDto" alias="ProjectDto"/> 
+		<typeAlias type="com.mvc.jigulyeog.model.dto.OrgDto" alias="OrgDto"/>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.CheerMessageDto" alias="CheerMessageDto"/>
 	</typeAliases>
 
 
   <mappers>
-     <!--  <mapper resource="/mybatis/mapper/test-mapper.xml"/>  -->
+     <mapper resource="/mybatis/mapper/project-mapper.xml"/>
+     <mapper resource="/mybatis/mapper/cheerMessage-mapper.xml"/>
   </mappers>
   
 </configuration>

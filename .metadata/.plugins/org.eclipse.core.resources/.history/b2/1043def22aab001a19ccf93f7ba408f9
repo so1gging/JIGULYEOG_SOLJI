@@ -1,0 +1,5 @@
+package com.mvc.jigulyeog.biz;
+
+public interface CheerMessageBiz {
+
+}

@@ -1,0 +1,14 @@
+package com.mvc.jigulyeog.model.dto;
+
+import java.util.Date;
+
+public class CheerMessageDto {
+	private int chher_num;
+	private int pro_num;
+	private String user_id;
+	private String chher_content;
+	private Date cheer_date;
+
+	
+	
+}

@@ -1,0 +1,11 @@
+package com.mvc.jigulyeog.controller;
+
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class CkeditorFileUploadController {
+	LoggerFactory logger = new LoggerFactory.getLogger(CkeditorFileUploadController.class);
+	
+	
+}

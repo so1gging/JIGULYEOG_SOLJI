@@ -1,0 +1,8 @@
+package com.mvc.jigulyeog.biz;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class CheerMessageBizImpl implements CheerMessageBiz{
+
+}

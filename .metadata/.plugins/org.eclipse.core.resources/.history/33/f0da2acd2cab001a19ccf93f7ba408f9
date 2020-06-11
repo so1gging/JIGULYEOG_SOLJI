@@ -1,0 +1,10 @@
+package com.mvc.jigulyeog.model.dao;
+
+import java.util.List;
+
+public interface CheerMessageDao {
+	String NAMESPACE = "mapper.cheerMessage.";
+	int totalArticle(int pro_num);
+	List<CheerMessageDao> getArticlelist(int startRow, int endRow);
+	
+}

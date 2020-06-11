@@ -1,0 +1,18 @@
+package com.mvc.jigulyeog.model.dto;
+
+import java.util.Date;
+
+public class ProjectDto {
+	private int pro_num; // 기본키
+	private String user_id; // 작성자(환경단체)
+	private int pro_title;
+	private int pro_nowmoney;
+	private int pro_goalmoney;
+	private Date pro_start_date;
+	private Date pro_due_date;
+	private String pro_detail;
+	private char pro_success;
+	private String pro_image;
+	
+	
+}
