@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -30,11 +31,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
+import com.mvc.jigulyeog.biz.FundingBiz;
 import com.mvc.jigulyeog.biz.ProjectBiz;
 import com.mvc.jigulyeog.model.dto.OrgDto;
 import com.mvc.jigulyeog.model.dto.PageMaker;
 import com.mvc.jigulyeog.model.dto.Paging;
 import com.mvc.jigulyeog.model.dto.ProjectDto;
+import com.mvc.jigulyeog.model.dto.UserDto;
 
 @Controller
 public class ProjectController {
@@ -42,6 +45,9 @@ public class ProjectController {
 	
 	@Autowired
 	ProjectBiz pb;
+	
+	@Autowired
+	FundingBiz fb;
 	
 	// Date type error : typeMisMatch
     @InitBinder
@@ -51,14 +57,18 @@ public class ProjectController {
     }
 
 	
-	// project list
+	// project List
 	@RequestMapping(value="/projectlist.do",method=RequestMethod.GET)
 	public String projectList(Model model,@RequestParam(value="page",required=false) Integer page,@RequestParam(value="category",required=false) Integer category,@RequestParam(value="keyword",required=false) String keyword) {
 		logger.info("[ ProjectController : projectList ]");
 		logger.info("[ page : "+page+" ]");
+		
+		// 만약, 검색을 했으면
 		Boolean searchIs = (keyword==null)?true:false;
 		
+		
 		if(searchIs) {
+			// 최신 순
 			if(category==null||category==1) {
 				// 만약 page가 넘어오지 않았다면,
 				if(page==null) {
@@ -75,9 +85,10 @@ public class ProjectController {
 				model.addAttribute("page",page);
 				model.addAttribute("pageMaker",maker);
 				model.addAttribute("category",1);
-				logger.info("startPage : "+maker.getStartPage());
-				logger.info("endPage : "+maker.getEndPage());
+				
 			}else if(category == 2) {
+				// 오래된 순
+				
 				// 만약 page가 넘어오지 않았다면,
 				if(page==null) {
 					page=1; // 첫 페이지를 보여준다.
@@ -93,10 +104,10 @@ public class ProjectController {
 				model.addAttribute("page",page);
 				model.addAttribute("pageMaker",maker);
 				model.addAttribute("category",2);
-				
-				logger.info("startPage : "+maker.getStartPage());
-				logger.info("endPage : "+maker.getEndPage());			
+						
 			}else if(category == 3) {
+				// 모금 순
+				
 				// 만약 page가 넘어오지 않았다면,
 				if(page==null) {
 					page=1; // 첫 페이지를 보여준다.
@@ -111,14 +122,15 @@ public class ProjectController {
 				model.addAttribute("PList",PList);
 				model.addAttribute("page",page);
 				model.addAttribute("pageMaker",maker);
-				model.addAttribute("category",3);
-				logger.info("startPage : "+maker.getStartPage());
-				logger.info("endPage : "+maker.getEndPage());			
+				model.addAttribute("category",3);		
 			}
 		}else {
-			// search
+			// 검색을 했을 때
+			
 			if(page==null) {page=1;}
+			
 			keyword=keyword.trim();
+			
 			Paging paging = pb.projectPagingSearch(page,keyword); // Paging 설정
 			
 			List<ProjectDto> PList = pb.projectSearch(paging,keyword); // 게시글 리스트 불러오기
@@ -139,14 +151,16 @@ public class ProjectController {
 	@RequestMapping("/projectwriteform.do")
 	public String projectWriteForm() {
 		logger.info("[ ProjectController : projectWriteForm ]");
+		
 		return "/project/project_writeform";
 	}
 	
-	// cheditor을 이용한 사진 업로드
+	// ckeditor을 이용한 사진 업로드
 	@RequestMapping(value="/ckeditorFileupload.do",method=RequestMethod.POST)
 	public String fileUpload(HttpServletRequest req,HttpServletResponse res,@RequestParam MultipartFile upload) throws IOException {
 		logger.info("[ ProjectController : fileUpload ]");
 		res.setContentType("text/html; charset=utf-8");
+		
 		JsonObject json = new JsonObject();
 		PrintWriter pw = res.getWriter();
 		OutputStream out = null;
@@ -156,11 +170,13 @@ public class ProjectController {
 		if(file != null) {
 			if(file.getSize() > 0 && StringUtils.isNoneBlank(file.getName())) {
 				// file의 type이 image라면
+				
 				if(file.getContentType().toLowerCase().startsWith("image/")) {
 					try {
 						String fileName = file.getName();
 						byte[] bytes = file.getBytes();
 
+						// upload path : /resources/upload/images/project/pro_detail
 						String uploadPath = req.getSession().getServletContext().getRealPath("/resources/upload/images/project/pro_detail"); // 업로드 경로
 						logger.info("[uploadPath :"+uploadPath+"]");
 						
@@ -172,6 +188,7 @@ public class ProjectController {
 						}
 						
 						fileName = UUID.randomUUID().toString(); // 랜덤글자
+						
 						uploadPath = uploadPath+"/"+fileName;
 						
 						File newfile = new File(uploadPath);
@@ -182,6 +199,7 @@ public class ProjectController {
 						
 						pw = res.getWriter();
 						res.setContentType("text/html");
+						
 						String fileUrl = req.getContextPath()+"/resources/upload/images/project/pro_detail/"+fileName;
 						logger.info("[fileUrl : "+fileUrl+"]");
 						
@@ -213,57 +231,57 @@ public class ProjectController {
 		
 		return null;
 	}
+	
 
 	// project Write!
 	@RequestMapping(value="/projectwrite.do",method=RequestMethod.POST)
 	public void projectWrite(ProjectDto project,HttpServletRequest request,HttpServletResponse response,@RequestParam("file") MultipartFile file) {
 		response.setContentType("text/html; charset=utf-8");
+		
 		logger.info("[ ProjectController : projectWrite ]");
 		
-		String pro_image = pb.projectfileUpload(file, request);
+		String pro_image = pb.projectfileUpload(file, request); // 대표이미지 설정
 		
 		if(pro_image!="") {
 			logger.info("[ ProjectController : Success setting Image ]");
 			project.setPro_image(pro_image);
 			boolean is = pb.projectWrite(project);
 			if(is==true) {
-				try {
-					jsResponse("프로젝트가 등록 되었습니다.","projectlist.do",response);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}		
-			}else {
-				
-				try {
-					jsResponse("프로젝트가 등록 에러.","projectlist.do",response);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}					
-				
+				try {jsResponse("프로젝트가 등록 되었습니다.","projectlist.do",response);}
+				catch (IOException e) {e.printStackTrace();}		
+			}else {				
+				try {jsResponse("프로젝트가 등록 에러.","projectlist.do",response);}
+				catch (IOException e) {e.printStackTrace();}						
 			}
 			
 		}else {
-			try {
-				jsResponse("이미지 등록 에러","projectlist.do",response);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			try {jsResponse("이미지 등록 에러","projectlist.do",response);}
+			catch (IOException e) {e.printStackTrace();}
 		}
 	}
 	
 	// project detail form
 	@RequestMapping("/projectdetail.do")
-	public String projectDetail(@RequestParam("pro_num") Integer pro_num,Model model) {
+	public String projectDetail(@RequestParam("pro_num") Integer pro_num,Model model,HttpSession session) {
 		logger.info("[ ProjectController : projectDetail ]");
-		
+
 		ProjectDto project = pb.getProjectOne(pro_num);
 		OrgDto org = pb.getProjectOneOrg(project.getUser_id());
 
-		model.addAttribute("project",project);
-		model.addAttribute("org",org);
+		model.addAttribute("project",project); // project info
+		model.addAttribute("org",org); // org info
+		
+		Boolean fundingChk = false; // 기부 여부
+		
+		// login check
+		if(session.getAttribute("user")!=null) {
+			UserDto user = (UserDto) session.getAttribute("user");
+			logger.info("[ login user : "+user.getUser_id()+" ]");
+			fundingChk = fb.checkFundingUser(user.getUser_id(),pro_num);
+			logger.info("[ funding Check :"+fundingChk+" ]");
+		}
+		
+		model.addAttribute("fundingChk",fundingChk);
 		
 		// D-Day 구하기
 		SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyy-MM-dd", Locale.KOREA );
@@ -279,22 +297,23 @@ public class ProjectController {
         // 이제 24*60*60*1000(각 시간값에 따른 차이점) 을 나눠주면 일수가 나온다.
         long calDateDays = calDate / ( 24*60*60*1000); 
 
-        calDateDays = Math.abs(calDateDays);
+        //logger.info("calDateDays"+calDateDays);
+        //calDateDays = Math.abs(calDateDays);
+        //logger.info("calDateDays"+(int)calDateDays);
+        
         logger.info("D-Day : "+(int)calDateDays);
         model.addAttribute("dday", (int)calDateDays);
 		
-		//logger.info(currentTime);
-		//logger.info(endTime);
-
-
 		
 		return "/project/project_detail";
 	}
 	
+	
+	// project update form
 	@RequestMapping("/projectupdateform.do")
 	public String projectUpdateForm(@RequestParam("pro_num") int pro_num,Model model) {
 		logger.info("[ ProjectController : projectUpdateForm ]");
-		logger.info("pro_num : "+pro_num);
+		logger.info("[ pro_num : "+pro_num+" ]");
 		
 		ProjectDto project = pb.getProjectOne(pro_num);
 		model.addAttribute("project", project);
@@ -302,6 +321,7 @@ public class ProjectController {
 		return "/project/project_updateform";
 	} 
 	
+	// project update
 	@RequestMapping("/projectupdate.do")
 	public void projectUpdate(ProjectDto project,HttpServletRequest request,HttpServletResponse response,@RequestParam(value="file",required=false) MultipartFile file) {
 		response.setContentType("text/html; charset=utf-8");
@@ -323,7 +343,7 @@ public class ProjectController {
 		
 	
 	boolean is = pb.projectUpdate(project);
-	logger.info("is: "+is);
+	
 	if(is==true) {
 			try {jsResponse("프로젝트가 수정되었습니다.","projectlist.do",response);}
 			catch (IOException e) {e.printStackTrace();}		
@@ -335,6 +355,7 @@ public class ProjectController {
 		
 	}
 	
+	// project delete
 	@RequestMapping("/projectdelete.do")
 	public void projectDelete(@RequestParam int pro_num,HttpServletRequest request,HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
@@ -352,26 +373,7 @@ public class ProjectController {
 		
 	}
 	
-//	@RequestMapping(value="/projectsearch.do",method=RequestMethod.GET)
-//	public String projectSearch(@RequestParam("keyword") String keyword,Model model) {
-//		logger.info("[ ProjectController : projectSearch ]");
-//		
-//		Paging paging = pb.projectPaging(1); // Paging 설정
-//		
-//		List<ProjectDto> PList = pb.projectSearch(keyword); // 게시글 리스트 불러오기
-//		
-//		PageMaker maker = pb.getPageMaker(paging);
-//		
-//		model.addAttribute("PList",PList);
-//		model.addAttribute("page",1);
-//		model.addAttribute("pageMaker",maker);
-//		model.addAttribute("category",1);
-//		
-//		
-//		return "redirect:projectlist.do";
-//	}
 	
-
 	private void jsResponse(String msg,String url,HttpServletResponse response) throws IOException {
 		
 		String s = "<script type='text/javascript' charset='utf-8'>"+

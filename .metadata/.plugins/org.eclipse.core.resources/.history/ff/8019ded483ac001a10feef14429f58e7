@@ -1,0 +1,7 @@
+package com.mvc.jigulyeog.model.dao;
+
+public interface FundingDao {
+	String NAMESPACE = "mapper.fundingList.";
+	Boolean checkFundingUser(String user_id, Integer pro_num);
+
+}

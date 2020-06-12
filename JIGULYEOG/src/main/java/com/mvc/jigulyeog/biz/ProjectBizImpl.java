@@ -29,7 +29,7 @@ public class ProjectBizImpl implements ProjectBiz{
 	@Autowired
 	ProjectDao dao;
 	
-	
+	// file upload
 	@Override
 	public String projectfileUpload(MultipartFile file,HttpServletRequest request) {
 		logger.info("[ ProjectBiz : projectfileUpload ]");
@@ -103,12 +103,14 @@ public class ProjectBizImpl implements ProjectBiz{
 		
 	}
 
+	// project write
 	@Override
 	public boolean projectWrite(ProjectDto project) {
 		logger.info("[ ProjectBiz : projectWrite ]");
 		return dao.projectWrite(project);
 	}
 	
+	// project paging
 	@Override
 	public Paging projectPaging(Integer page) {
 		logger.info("[ ProjectBiz : projectPaging ]");
@@ -133,6 +135,7 @@ public class ProjectBizImpl implements ProjectBiz{
 	}
 	
 
+	// get project list
 	@Override
 	public List<ProjectDto> projectList(Paging paging) {
 		logger.info("[ ProjectBiz : projectList ]");
@@ -160,6 +163,8 @@ public class ProjectBizImpl implements ProjectBiz{
 		return PList;
 	}
 
+	
+	// project paging maker
 	@Override
 	public PageMaker getPageMaker(Paging paging) {
 		logger.info("[ ProjectBiz : getPageMaker ]");
@@ -168,33 +173,39 @@ public class ProjectBizImpl implements ProjectBiz{
 		return maker;
 	}
 
+	// get project one
 	@Override
 	public ProjectDto getProjectOne(int pro_num) {
 		logger.info("[ ProjectBiz : getProjectOne ]");
 		return dao.getProjectOne(pro_num);
 	}
 
+	
+	// get org one
 	@Override
 	public OrgDto getProjectOneOrg(String user_id) {
 		logger.info("[ ProjectBiz : getProjectOneOrg ]");		
 		return dao.getProjectOneOrg(user_id);
 	}
 
+	// project update
 	@Override
 	public boolean projectUpdate(ProjectDto project) {
 		logger.info("[ ProjectBiz : projectUpdate ]");		
 		return dao.projectUpdate(project);
 	}
 
+	// project delete
 	@Override
 	public boolean projectDelete(int pro_num) {
 		logger.info("[ ProjectBiz : projectDelete ]");	
 		return dao.projectDelete(pro_num);
 	}
 
+	// project search
 	@Override
 	public List<ProjectDto> projectSearch(Paging paging,String keyword) {
-logger.info("[ ProjectBiz : projectSearch ]");
+		logger.info("[ ProjectBiz : projectSearch ]");
 		
 		List<ProjectDto> PList = dao.getArticleListSearch(paging.getStartRow(), paging.getEndRow(),keyword);
 
@@ -223,11 +234,6 @@ logger.info("[ ProjectBiz : projectSearch ]");
 
 		return paging;
 	}
-
-
-
-	
-	
 
 
 }

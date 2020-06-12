@@ -1,0 +1,11 @@
+package com.mvc.jigulyeog.model.dao;
+
+import java.util.List;
+
+import com.mvc.jigulyeog.model.dto.DMListDto;
+
+public interface DMDao {
+
+	List<DMListDto> getDMList(String user_id);
+
+}

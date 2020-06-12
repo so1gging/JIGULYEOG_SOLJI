@@ -37,6 +37,7 @@
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
+		// search check
 		$(function(){
 			$("#searchBtn").click(function(){
 				if($("#searchKeyword").val()==""){
@@ -117,7 +118,7 @@
 						<c:forEach var="project" items="${PList }">
 								<div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
 			                        <div class="card fundraise-item mb-5">
-			                            <a href="projectdetail.do?pro_num=${project.pro_num }" style="margin: 0px auto; margin-top: 10px;"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/project/${project.pro_image}" style="width: 330px; height: 300px;  " alt="Image placeholder"></a>
+			                            <a href="projectdetail.do?pro_num=${project.pro_num }" style="margin: 0px auto; margin-top: 10px;"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/project/${project.pro_image}" style="width: 330px; height: 300px;" alt="Image placeholder"></a>
 			                            <div class="card-body">
 			                              <h3 class="card-title"><a href="projectdetail.do?pro_num=${project.pro_num }">${project.pro_title }</a></h3>
 			                              <span class="donation-time mb-3 d-block">
@@ -171,27 +172,6 @@
           </ul>
         </nav>
       </div>
-	<!-- 
-    <div style="width: 200px; margin: 0px auto;"> 
-        <nav aria-label="Page navigation">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-   -->
       
       <c:if test="${!empty user }">
       	<c:if test="${user.user_status ne 0 }">
@@ -203,7 +183,7 @@
 
     </div>
     <!-- ------------------------- -->
-
+	<!-- PAGE MAKER PART -->
 
   </div> <!-- .section -->
   <!----------------- End Project ----------------->   

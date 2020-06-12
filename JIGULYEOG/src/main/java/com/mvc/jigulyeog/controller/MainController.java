@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mvc.jigulyeog.model.dto.MakeDMKey;
 import com.mvc.jigulyeog.model.dto.UserDto;
 
 @Controller
@@ -22,7 +23,9 @@ public class MainController {
 	@RequestMapping("login.do")
 	public String testLogin(HttpSession session) {
 		logger.info("[temporary LOGIN]");
-		UserDto user = new UserDto("ORG01","1111","(사)무지개세상","장승진","01012341234","서울특별시 서초구 매헌로 54 (양재동)","",1);
+		//UserDto user = new UserDto("ORG01","1111","(사)무지개세상","장승진","01012341234","서울특별시 서초구 매헌로 54 (양재동)","",1);
+		//UserDto user = new UserDto("TEST","TEST","TEST","TEST","01012341234","주소","",0);
+		UserDto user = new UserDto("TEST","TEST","TEST","TEST","01012341234","주소","",0);
 		session.setAttribute("user", user);
 		
 		return "redirect:index.do";

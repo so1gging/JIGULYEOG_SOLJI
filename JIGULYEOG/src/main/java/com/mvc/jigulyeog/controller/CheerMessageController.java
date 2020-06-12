@@ -41,6 +41,7 @@ public class CheerMessageController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat,true));
     }
 	
+    // chherMsg List
 	@RequestMapping(value="/cheerMsgList.do",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> getCheerMsgList(HttpSession session, @RequestBody Map param, @RequestParam(value="page",required=false) Integer page) {
@@ -53,7 +54,6 @@ public class CheerMessageController {
 		
 		logger.info("[ page : "+page+" ]");
 		
-		//logger.info((param.get("pro_num")).toString());
 		int pro_num = Integer.parseInt(param.get("pro_num").toString());
 		
 		logger.info("[ pro_num :"+pro_num+" ]");
@@ -106,13 +106,13 @@ public class CheerMessageController {
 		
 	}
 	
+	// 댓글 수정 (AJAX)
 	@RequestMapping("/cheerMsgUpdate.do")
 	@ResponseBody
 	public Map<String, Boolean> cheerMsgUpdate(HttpSession session, @RequestBody CheerMessageDto msg){
 		logger.info("[ CheerMessageController : cheerMsgUpdate ]");
 		
 		Boolean is = false;
-		logger.info(msg.toString());
 		
 		Map<String ,Boolean> map = new HashMap<String,Boolean>();
 		
@@ -123,6 +123,7 @@ public class CheerMessageController {
 		
 	}
 	
+	// 댓글 삭제 (AJAX)
 	@RequestMapping("/cheerMsgDelete.do")
 	@ResponseBody
 	public Map<String, Boolean> cheerMsgDelete(HttpSession session, @RequestBody CheerMessageDto msg){

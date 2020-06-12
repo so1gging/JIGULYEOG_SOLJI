@@ -29,6 +29,7 @@ public class ProjectDaoImpl implements ProjectDao{
 			res = sqlSession.insert(NAMESPACE+"writeProject",project);			
 		} catch (Exception e) {
 			logger.info("[ error : projectWrite ]");
+			e.getStackTrace();
 		}
 		
 		return (res>0)?true:false;
@@ -42,6 +43,7 @@ public class ProjectDaoImpl implements ProjectDao{
 			totalArticle = sqlSession.selectOne(NAMESPACE+"totalArticle");
 		}catch (Exception e) {
 			logger.info("[ error : totalArticle ]");
+			e.getStackTrace();
 		}
 		logger.info("[ totalArticle : "+totalArticle+"]");
 		return totalArticle;

@@ -189,7 +189,7 @@
 	          <tr>
 	            <td colspan="2" style="text-align: right;">
 	              <input type="button" class="btn btn-success" value="입력" id="submitBtn" style="display: inline-block;">
-	              <input type="button" value="취소" class="btn btn-success" style="display: inline-block;">
+	              <input type="button" value="취소" class="btn btn-success" onclick="location.href='projectdetail.do?pro_num=${project.pro_num}'" style="display: inline-block;">
 	            </td>
 	          </tr> 
 	      </table>

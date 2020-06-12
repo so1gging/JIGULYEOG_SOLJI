@@ -45,7 +45,6 @@ public class CheerMessageDaoImpl implements CheerMessageDao{
 		param.put("endRow", endRow);
 		param.put("pro_num", pro_num);
 		
-		logger.info("startRow:"+startRow+", endRow:"+endRow);
 		
 		try {
 			getArticleList = sqlSession.selectList(NAMESPACE+"getArticleList",param);

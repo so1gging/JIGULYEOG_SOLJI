@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<!-- 별칭 설정 -->
+	<typeAliases>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.ProjectDto" alias="ProjectDto"/> 
+		<typeAlias type="com.mvc.jigulyeog.model.dto.OrgDto" alias="OrgDto"/>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.CheerMessageDto" alias="CheerMessageDto"/>		
+		<typeAlias type="com.mvc.jigulyeog.model.dto.FundingListDto" alias="FundingListDto"/>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.ChungwonDto" alias="ChungwonDto"/>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.SignUpDto" alias="SignUpDto"/>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.TogetherDto" alias="TogetherDto"/>
+		<typeAlias type="com.mvc.jigulyeog.model.dto.TogetherApplyDto" alias="TogetherApplyDto"/>		
+		<typeAlias type="com.mvc.jigulyeog.model.dto.DMListDto" alias="DMListDto"/>		
+	</typeAliases>
+
+
+  <mappers>
+     <mapper resource="/mybatis/mapper/project-mapper.xml"/>
+     <mapper resource="/mybatis/mapper/cheerMessage-mapper.xml"/>
+     <mapper resource="/mybatis/mapper/fundingList-mapper.xml"/>
+     <mapper resource="/mybatis/mapper/mypage-mapper.xml" />
+  </mappers>
+  
+</configuration>

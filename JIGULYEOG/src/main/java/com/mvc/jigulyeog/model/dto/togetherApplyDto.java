@@ -1,15 +1,15 @@
 package com.mvc.jigulyeog.model.dto;
 
-public class togetherApplyDto {
+public class TogetherApplyDto {
 	private int apply_key;
 	private int tog_no;
 	private String user_id;
 	
-	public togetherApplyDto() {
+	public TogetherApplyDto() {
 		super();
 	}
 
-	public togetherApplyDto(int apply_key, int tog_no, String user_id) {
+	public TogetherApplyDto(int apply_key, int tog_no, String user_id) {
 		super();
 		this.apply_key = apply_key;
 		this.tog_no = tog_no;

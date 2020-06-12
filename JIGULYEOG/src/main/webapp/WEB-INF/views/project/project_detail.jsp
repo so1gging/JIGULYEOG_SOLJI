@@ -39,17 +39,34 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 	
+		function donateForm(){
+			var chk = '<c:out value="${fundingChk }"/>';
+			if(chk == 'true'){
+				var is = confirm("기부 내역이 존재합니다. 중복 기부 하시겠습니까?");
+				if(is){
+					// 예
+					var pro_num = '<c:out value="${project.pro_num}"/>';
+					location.href='paypage.do?pro_num='+pro_num+'&overlap=true';
+				}
+			}else{
+				var pro_num = '<c:out value="${project.pro_num}"/>';
+				location.href='paypage.do?pro_num='+pro_num;
+			}
+		}
+	
+		// show update Form
 		function updateForm(i){
 			$(".default"+i+"").css({"display":"none"});
 			$(".update"+i+"").css({"display":"block"});
 		}
 		
-	
+		// show rollback
 		function rollbackUpdate(i){
 			$(".update"+i+"").css({"display":"none"});			
 			$(".default"+i+"").css({"display":"block"});
 		}
 		
+		// update Masg
 		function updateMsg(i){
 			
 			var formName = "upform"+i;
@@ -84,6 +101,7 @@
 			
 		}
 		
+		// delete Msg
 		function delCheerMsg(i){
 			var param = {"cheer_num":i};
 			$.ajax({
@@ -110,6 +128,7 @@
 		}
 	
 
+		// paging Cheer Msg
 		function pagingCheerMsg(page){
 			// 초기화
 			$("#cheerMsgForm").html("");
@@ -246,8 +265,8 @@
 					
 				}
 				
-				if($("#msgContent").val().length<10){
-						alert("10자 이상 입력해주세요.");	
+				if($("#msgContent").val().length<0){
+						alert("내용을 입력해주세요.");	
 						return false;
 				}
 				
@@ -397,16 +416,17 @@
                     <div class="progress custom-progress-success" style="height: 10px;">
                         <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
-                      <span class="fund-raised d-block" style="font-size:1.2em;"><fmt:formatDate value="${project.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${project.pro_due_date}" pattern="yyyy.MM.dd"/>까지</span>
-                      
+                      <span class="fund-raised d-block" style="font-size:1.2em;"><fmt:formatDate value="${project.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${project.pro_due_date}" pattern="yyyy.MM.dd"/>까지</span>                     
+                      	
                       <h4 style="font-weight: 600; text-align: center;" class="m-3"><span style="color: #f86f46;"><fmt:formatNumber value="${project.pro_nowmoney }" pattern="#,###.##"/> 원 </span></h4>
-						<h4 style="text-align:center; font-size:1em; color:#b3b3b3;"><fmt:formatNumber value="${project.pro_goalmoney }" pattern="#,###.##"/> 원 목표</h4>
+					  
+					  <h4 style="text-align:center; font-size:1em; color:#b3b3b3;"><fmt:formatNumber value="${project.pro_goalmoney }" pattern="#,###.##"/> 원 목표</h4>
                     <div class="mt-3 mb-2" style="background-color: #f86f46; color: white; width: 50px; text-align: center;">
                         <span style="font-weight: 500;">
                         		D- 
                         		<c:choose>
-                        			<c:when test="${dday eq 0 }">
-                        				Day
+                        			<c:when test="${dday <= 0 }">
+                        				0
                         			</c:when>
                         			<c:otherwise>
 	                        			${dday}                        			
@@ -420,12 +440,22 @@
                         <div class="donate-info">
                           <h2>${org.org_name }</h2>
                           <span class="time d-block mb-3">${org.org_role }</span>
-            
+                          
+                          <c:if test="${(user.user_id ne project.user_id) && dday >= 0 }">
+		                       <div class="donate-amount d-flex m-1" style="width: 100%;">
+		                          <input type="button" class="btn btn-success" style="width: 100%;" onclick="donateForm();" value="기부하기">
+		                       </div>                           
+                          </c:if>
+		                                  				
+            				<c:if test="${ (user.user_id eq project.user_id) || fundingChk eq true }">
+	                           <div class="donate-amount d-flex m-1" style="width: 100%;">
+	                            	<input type="button" class="btn btn-warning" style="width: 100%; color: white;" value="커뮤니티 입장">
+	                          </div>           				
+            				</c:if>
+
+                          
                           <div class="donate-amount d-flex m-1" style="width: 100%;">
-                            <input type="button" class="btn btn-success" style="width: 100%;" value="기부하기">
-                          </div>
-                          <div class="donate-amount d-flex m-1" style="width: 100%;">
-                            <input type="button" class="btn btn-primary" style="width: 100%;" value="DM 보내기"">
+                            <input type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="location.href='dmlist.do'" value="DM 보내기">
                           </div>
 
                           

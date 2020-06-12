@@ -1,0 +1,8 @@
+package com.mvc.jigulyeog.model.dto;
+
+public class DMListDto {
+	private String user_id;
+	private String dm_id;
+	private String dm_key;
+	
+}
