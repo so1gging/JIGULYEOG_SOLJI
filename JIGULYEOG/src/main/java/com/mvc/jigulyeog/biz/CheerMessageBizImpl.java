@@ -1,5 +1,6 @@
 package com.mvc.jigulyeog.biz;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -78,6 +79,22 @@ public class CheerMessageBizImpl implements CheerMessageBiz{
 		logger.info("[ CheerMessageBiz : cheerMsgDelete ]");
 		
 		return dao.cheerMsgDelete(cheer_num);
+	}
+
+	@Override
+	public List<String> getUserImgList(List<CheerMessageDto> cMList) {
+		logger.info("[ CheerMessageBiz : getUserImgList ]");
+		
+		List<String> userImgList = new ArrayList<String>();
+		
+		for(CheerMessageDto dto:cMList) {
+			String imgName = dao.getUserImg(dto.getUser_id());
+			if(imgName==null) {imgName="";}
+			userImgList.add(imgName);
+			
+		}
+		
+		return userImgList;
 	}
 
 }

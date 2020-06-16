@@ -14,4 +14,5 @@ public interface CheerMessageBiz {
 	Boolean cheerMsgWrite(CheerMessageDto msg);
 	Boolean cheerMsgUpdate(CheerMessageDto msg);
 	Boolean cheerMsgDelete(int cheer_num);
+	List<String> getUserImgList(List<CheerMessageDto> cMList);
 }

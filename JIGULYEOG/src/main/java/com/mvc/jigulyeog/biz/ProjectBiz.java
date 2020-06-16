@@ -42,4 +42,5 @@ public interface ProjectBiz {
 	// project search
 	Paging projectPagingSearch(Integer page,String keyword);
 	List<ProjectDto> projectSearch(Paging paging,String keyword);
+
 }

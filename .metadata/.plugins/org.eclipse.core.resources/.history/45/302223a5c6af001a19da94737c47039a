@@ -1,0 +1,9 @@
+package com.mvc.jigulyeog.model.dto;
+
+public class CommunityGuestbookDto {
+	private int cation_num;
+	private int com_num;
+	private String user_id;
+	private String cation_content;
+	private Date cation_date;
+}

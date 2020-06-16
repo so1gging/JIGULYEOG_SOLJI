@@ -24,7 +24,11 @@ public class Paging {
 		}
 		this.page = page;
 	}
-	
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 
 	// 전체 게시글 갯수
 	public void setTotalArticle(int totalArticle) {

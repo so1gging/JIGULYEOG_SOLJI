@@ -76,7 +76,7 @@
                   귀하의 기부금은 해당 프로젝트에 많은 기여가 될 것 입니다.<br>
                   앞으로의 프로젝트 소식들은 해당 환경단체 커뮤니티에서 확인하실 수 있습니다.<br>
 
-                  <input type="button" class="btn btn-success mt-3" style="width: 300px;" onclick="" value="커뮤니티 입장하기">
+                  <input type="button" class="btn btn-success mt-3" style="width: 300px;" onclick="location.href='community.do?pro_num=${pro_num}'" value="커뮤니티 입장하기">
                 </p>
               </div>
             </div>

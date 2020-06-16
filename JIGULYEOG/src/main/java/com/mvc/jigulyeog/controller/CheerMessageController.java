@@ -69,9 +69,13 @@ public class CheerMessageController {
 			chk = true;
 			Paging paging = cmb.cheerMsgPaging(page,pro_num); // Paging설정			
 			List<CheerMessageDto> CMList = cmb.cheerMsgList(paging,pro_num); // 댓글 리스트 불러오기
+			
+			List<String> userImgList = cmb.getUserImgList(CMList);
+			
 			PageMaker maker = cmb.getPageMaker(paging);
 
 			model.put("CMList", CMList);
+			model.put("imgList", userImgList);
 			model.put("page", page);
 			model.put("pageMaker", maker);
 		}

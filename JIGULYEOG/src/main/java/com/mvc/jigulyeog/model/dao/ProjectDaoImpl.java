@@ -221,6 +221,4 @@ public class ProjectDaoImpl implements ProjectDao{
 		return totalArticle;
 	}
 
-
-
 }

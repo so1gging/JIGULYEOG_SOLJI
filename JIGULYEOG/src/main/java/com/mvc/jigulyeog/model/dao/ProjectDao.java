@@ -24,4 +24,5 @@ public interface ProjectDao {
 	
 	List<ProjectDto> getArticleListSearch(int startRow, int endRow, String keyword);
 	int totalArticleSearch(String keyword);
+
 }

@@ -2,6 +2,7 @@ package com.mvc.jigulyeog.biz;
 
 import java.util.List;
 
+import com.mvc.jigulyeog.model.dto.DMChatDto;
 import com.mvc.jigulyeog.model.dto.DMListDto;
 
 public interface DMBiz {
@@ -13,5 +14,11 @@ public interface DMBiz {
 
 	// [3]
 	Boolean addDM(String user_id, String dm_id);
+
+	List<DMChatDto> getDMCHatLog(DMListDto dto);
+
+	Boolean deleteDM(String user_id, String dm_id, String dm_key);
+
+	List<DMListDto> checkUnreadDM(String user_id);
 
 }

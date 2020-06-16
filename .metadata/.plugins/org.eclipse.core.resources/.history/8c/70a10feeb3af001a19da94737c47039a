@@ -1,0 +1,111 @@
+package com.mvc.jigulyeog.model.dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.mvc.jigulyeog.model.dto.CommunityNoticeDto;
+import com.mvc.jigulyeog.model.dto.UserDto;
+
+@Repository
+public class CommunityDaoImpl implements CommunityDao{
+	Logger logger = LoggerFactory.getLogger(CommunityDaoImpl.class);
+	
+	@Autowired
+	SqlSessionTemplate sqlSession;
+	
+	@Override
+	public Boolean createCommunity(Integer pro_num) {
+		logger.info("[ CommunityDao : createCommunity ]");
+		int res = 0;
+		
+		try {
+			res = sqlSession.insert(NAMESPACE+"createCommunity",pro_num);
+		} catch (Exception e) {
+			logger.info("[ CommunityDao error : createCommunity ]");
+			e.getStackTrace();
+		}
+		
+		return (res>0)?true:false;
+	}
+
+	@Override
+	public Boolean checkCommunity(Integer pro_num) {
+		logger.info("[ CommunityDao : checkCommunity ]");
+		Integer res = 0;
+		
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"checkCommunity",pro_num);
+		} catch (Exception e) {
+			logger.info("[ CommunityDao error : checkCommunity ]");
+			e.getStackTrace();
+		}
+		
+		return (res!=null)?true:false;
+	}
+
+	@Override
+	public List<UserDto> fundingUserList(int pro_num) {
+		logger.info("[ CommunityDao : fundingUserList ]");
+		List<UserDto> fundingUserList = new ArrayList<UserDto>();
+		
+		try {
+			fundingUserList = sqlSession.selectList(NAMESPACE+"fundingUser",pro_num);
+			
+		} catch (Exception e) {
+			logger.info("[ CommunityDao error : fundingUserList ]");
+			e.printStackTrace();
+		}
+		return fundingUserList;
+	}
+
+	@Override
+	public int getCommunityNo(int pro_num) {
+		logger.info("[ CommunityDao : checkCommunity ]");
+		Integer commNo = 0;
+		
+		try {
+			commNo = sqlSession.selectOne(NAMESPACE+"checkCommunity",pro_num);
+		} catch (Exception e) {
+			logger.info("[ CommunityDao error : checkCommunity ]");
+			e.getStackTrace();
+		}
+		
+		return commNo;
+	}
+
+	@Override
+	public Boolean commNoticeWrite(CommunityNoticeDto notice) {
+		logger.info("[ CommunityDao : commNoticeWrite ]");
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE+"noticeWrite",notice);
+		} catch (Exception e) {
+			logger.info("[ CommunityDao error : commNoticeWrite ]");
+			e.getStackTrace();
+		}
+		
+		return (res>0)?true:false;
+	}
+
+	@Override
+	public int totalNotice() {
+		logger.info("[ CommunityDao : totalNotice ]");
+		int totalNotice = 0;
+		
+		try {
+			totalArticle = sqlSession.selectOne(NAMESPACE+"totalNotice");
+		}catch (Exception e) {
+			logger.info("[ error : totalArticle ]");
+			e.getStackTrace();
+		}
+		logger.info("[ totalArticle : "+totalArticle+"]");
+		return totalArticle;
+	}
+
+}

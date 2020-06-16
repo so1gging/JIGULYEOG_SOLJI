@@ -11,5 +11,6 @@ public interface CheerMessageDao {
 	Boolean cheerMsgWrite(CheerMessageDto msg);
 	Boolean cheerMsgUpdate(CheerMessageDto msg);
 	Boolean cheerMsgDelete(int cheer_num);
+	String getUserImg(String user_id);
 	
 }

@@ -41,15 +41,6 @@
             }
  
      </style>
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-     <script>
-         function viewChat(){
-            $("#noWrap").css("display","none");
-            $("#chatWrap").css("display","block");
-         }
-
-     </script>
   </head>
   <body>
    <!----------------- START nav ----------------->
@@ -82,6 +73,7 @@
                         <div id="roomWrap">
                             <div id="roomList">
                                 <div id="roomHeader">DM 리스트</div>
+                                <input type="hidden" value="${user.user_id }" name="user_id" id="user_id"/>
                                 <div id="roomSelect">
                                 
                                 	<c:choose>
@@ -93,8 +85,8 @@
 				                                                ${DM.dm_id }
 				                                            </button>
 				                                            <div class="dropdown-menu">
-				                                                <a class="dropdown-item" id="${DM.dm_key }" onclick="viewChat();">대화하기</a>
-				                                                <a class="dropdown-item" href="#">삭제하기</a>
+				                                                <a class="dropdown-item chatStart" onclick="viewChat('${user.user_id }','${DM.dm_id}','${DM.dm_key }');" name="${DM.dm_id}" id="${DM.dm_key }">대화하기</a>
+				                                                <a class="dropdown-item" href="deleteDM.do?user_id=${user.user_id }&dm_id=${DM.dm_id }&dm_key=${DM.dm_key }">삭제하기</a>
 				                                            </div>
 				                                        </div>
 				                                    </div>
@@ -122,7 +114,7 @@
 
 						<!-- DM창-->
                         <div id="chatWrap" style="display:none;">
-                            <div id="chatHeader">JIHYE</div>
+                            <div id="chatHeader">chatHeader</div>
                             <div id="chatLog">
                               
                             </div>
@@ -161,10 +153,14 @@
   <script src="${pageContext.request.contextPath}/resources/js/owl.carousel.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"></script>
-  
   <script src="${pageContext.request.contextPath}/resources/js/aos.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/jquery.animateNumber.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+ <script src="http://localhost:82/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/personal_js/dmChat.js" ></script>
+  
     
   </body>
 </html>

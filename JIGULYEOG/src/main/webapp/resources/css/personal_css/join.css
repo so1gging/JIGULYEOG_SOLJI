@@ -31,4 +31,21 @@
     display: block;
     clear: both;
 }
+
+.btn_success{
+	 background: #28a745;
+	 border: 2px solid #28a745;
+	 color: #fff;
+}
+
+.btn_success:hover{
+	border: 2px solid #28a745;
+    background-color: #fff;
+    color: #28a745;
+}
+
+.check_text{
+	text-align: left;
+	margin-left: 10px;
+}
 /******************************************/

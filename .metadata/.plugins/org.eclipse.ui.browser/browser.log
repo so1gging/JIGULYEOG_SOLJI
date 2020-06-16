@@ -13,3 +13,9 @@
 
 6월 11, 2020 18:56:49.30 NEW SESSION
 6월 11, 2020 18:56:49.30 [9008:2604:0611/185649.298:ERROR:backend_impl.cc(1041)] Critical error found -8
+
+6월 16, 2020 19:53:52.56 NEW SESSION
+6월 16, 2020 19:53:52.56 [15720:11828:0616/195352.550:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+6월 16, 2020 19:53:52.58 [15720:11828:0616/195352.550:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+6월 16, 2020 19:54:14.75 [15720:11828:0616/195414.759:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106
+6월 16, 2020 19:54:21.55 [15720:11828:0616/195421.555:ERROR:connection_factory_impl.cc(420)] Failed to connect to MCS endpoint with error -106

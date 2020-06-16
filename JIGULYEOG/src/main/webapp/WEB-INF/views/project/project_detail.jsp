@@ -153,8 +153,8 @@
 					// 댓글이 있다면,
 					if(msg.check==true){
 						
-						var CMList = []; var page; var pageMaker;
-						CMList = msg.CMList; page = msg.page; pageMaker = msg.pageMaker;
+						var CMList = []; var imgList=[]; var page; var pageMaker;
+						CMList = msg.CMList; imgList=msg.imgList; page = msg.page; pageMaker = msg.pageMaker;
 						page = msg.page;
 						pageMaker = msg.pageMaker;
 						
@@ -166,7 +166,11 @@
 							// default form
 							str += '<li class="comment default'+CMList[i].cheer_num+'">';
 		                     str +=  '<div class="vcard bio">';
-		                      str +=  '<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" alt="Image placeholder">';
+		                     if(imgList[i]==""){
+		                    	 str +=  '<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" alt="Image placeholder">';
+		                     }else{
+		                      str +=  '<img src="${pageContext.request.contextPath}/resources/upload/images/user/'+imgList[i]+'" alt="Image placeholder">';		                    	 
+		                     }
 		                      str+= '</div>';
 		                      str += '<div class="comment-body">';
 		                        str += '<h3 style="width:100%;">'+CMList[i].user_id+'</h3>';
@@ -186,7 +190,7 @@
 							str +='<form action="cheerMsgUpdate.do" method="post" name="upform'+CMList[i].cheer_num+'">';
 							str += '<input type="hidden" name="cheer_num" value="'+CMList[i].cheer_num+'"/>';
 		                     str +=  '<div class="vcard bio">';
-		                      str +=  '<img src="${pageContext.request.contextPath}/resources/images/person_1.jpg" alt="Image placeholder">';
+		                      str +=  '<img src="${pageContext.request.contextPath}/resources/upload/images/user/${user.getUser_pic()}" alt="Image placeholder">';
 		                      str+= '</div>';
 		                      str += '<div class="comment-body">';
 		                        str += '<h3 style="width:100%;">'+CMList[i].user_id+'</h3>';
@@ -449,14 +453,15 @@
 		                                  				
             				<c:if test="${ (user.user_id eq project.user_id) || fundingChk eq true }">
 	                           <div class="donate-amount d-flex m-1" style="width: 100%;">
-	                            	<input type="button" class="btn btn-warning" style="width: 100%; color: white;" value="커뮤니티 입장">
+	                            	<input type="button" class="btn btn-warning" onclick="location.href='createcomm.do?pro_num=${project.pro_num}'" style="width: 100%; color: white;" value="커뮤니티 입장">
 	                          </div>           				
             				</c:if>
 
-                          
-                          <div class="donate-amount d-flex m-1" style="width: 100%;">
-                            <input type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="location.href='dmlist.do'" value="DM 보내기">
-                          </div>
+                          <c:if test="${project.user_id ne user.user_id }">
+	                          <div class="donate-amount d-flex m-1" style="width: 100%;">
+	                            <input type="button" class="btn btn-outline-primary" style="width: 100%;" onclick="location.href='dmlistadd.do?add=${project.user_id}'" value="DM 보내기">
+	                          </div>                         
+                          </c:if>
 
                           
                         </div>

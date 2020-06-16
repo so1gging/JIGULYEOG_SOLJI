@@ -1,6 +1,0 @@
-package com.mvc.jigulyeog.biz;
-
-@Service
-public class TestBiz {
-
-}

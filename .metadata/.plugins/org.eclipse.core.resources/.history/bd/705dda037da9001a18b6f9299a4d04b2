@@ -1,9 +1,0 @@
-package com.mvc.jigulyeog.model.dao;
-
-import org.springframework.stereotype.Repository;
-
-@Repository
-public class TestDao {
-
-	
-}

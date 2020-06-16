@@ -102,6 +102,19 @@ public class CheerMessageDaoImpl implements CheerMessageDao{
 		
 		return (res>0)?true:false;
 	}
+
+	@Override
+	public String getUserImg(String user_id) {
+		logger.info("[ CheerMessageDao : getUserImg ]");
+		String imgName = "";
+		try {
+			imgName = sqlSession.selectOne(NAMESPACE+"getUserImg",user_id);
+		}catch (Exception e) {
+			logger.info("[ CheerMessageDao error : getUserImg ]");
+			e.getStackTrace();
+		}
+		return imgName;
+	}
 	
 	
 }

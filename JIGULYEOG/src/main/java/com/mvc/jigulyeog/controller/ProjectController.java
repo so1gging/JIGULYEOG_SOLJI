@@ -156,9 +156,9 @@ public class ProjectController {
 	}
 	
 	// ckeditor을 이용한 사진 업로드
-	@RequestMapping(value="/ckeditorFileupload.do",method=RequestMethod.POST)
-	public String fileUpload(HttpServletRequest req,HttpServletResponse res,@RequestParam MultipartFile upload) throws IOException {
-		logger.info("[ ProjectController : fileUpload ]");
+	@RequestMapping(value="/ckeditorProjectFileupload.do",method=RequestMethod.POST)
+	public String ckeditorProjectFileUpload(HttpServletRequest req,HttpServletResponse res,@RequestParam MultipartFile upload) throws IOException {
+		logger.info("[ ProjectController : ckeditorFileUpload ]");
 		res.setContentType("text/html; charset=utf-8");
 		
 		JsonObject json = new JsonObject();

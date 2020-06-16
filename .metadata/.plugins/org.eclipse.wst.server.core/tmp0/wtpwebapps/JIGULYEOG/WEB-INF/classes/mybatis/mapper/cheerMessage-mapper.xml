@@ -47,6 +47,12 @@
 		WHERE PRO_NUM = #{pro_num}
 		ORDER BY CHEER_NUM DESC
 	</select>
+	
+	<select id="getUserImg" parameterType="String" resultType="String">
+		SELECT USER_PIC
+		FROM USER_TB
+		WHERE USER_ID = #{user_id}
+	</select>
 
 	
 </mapper>
