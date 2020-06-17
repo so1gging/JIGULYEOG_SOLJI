@@ -1,7 +1,0 @@
-package com.mvc.jigulyeog.model.dto;
-
-public class PageMaker {
-	private final static int blockSize = 5; // 페이지 블럭 개수 << [<] [1] [2] [3] [4] [5] [>] >> 일 때, 5 
-
-
-}

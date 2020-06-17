@@ -34,9 +34,22 @@ public class FundingController {
 	public String paypage(@RequestParam("pro_num") Integer pro_num,@RequestParam(value="overlap",required=false) String overlap, Model model) {
 		logger.info("[ FundingController : paypage ]");
 		logger.info("[ pro_num : "+pro_num+" ]");
-		ProjectDto project = pb.getProjectOne(pro_num);
 		
+		model.addAttribute("pro_num", pro_num);
+		
+		if(overlap!=null) {model.addAttribute("overlap",overlap);}
+
+		return "/project/paypage_certification";
+	}
+	
+	@RequestMapping("/payment.do")
+	public String payment(@RequestParam("pro_num") Integer pro_num,@RequestParam(value="overlap",required=false) String overlap, Model model) {
+		logger.info("[ FundingController : payment ]");
+		logger.info("[ pro_num : "+pro_num+" ]");
+		
+		ProjectDto project = pb.getProjectOne(pro_num);
 		model.addAttribute("project",project);
+		
 		if(overlap!=null) {model.addAttribute("overlap",true);}
 
 		return "/project/paypage";
@@ -58,8 +71,6 @@ public class FundingController {
 			//중복기부
 			is = fb.fundingProcessOverlap(sponser);
 		}
-
-		
 
 		map.put("check", is);
 		return map;

@@ -1,0 +1,157 @@
+package com.mvc.jigulyeog.controller;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.mvc.jigulyeog.model.dto.SendSMS;
+
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import java.util.*;
+import java.security.*;
+import java.io.*;
+import java.net.*;
+
+@Controller
+public class SMSController {
+	Logger logger = LoggerFactory.getLogger(SMSController.class);
+
+	@RequestMapping(value="sendSMS.do",method= {RequestMethod.GET,RequestMethod.POST})
+	public String sendSMS(HttpServletResponse res,SendSMS sms) {
+		res.setContentType("text/html; charset=utf-8");
+		
+		String sms_url = "";
+		
+		sms_url = "https://sslsms.cafe24.com/sms_sender.php"; // SMS 전송요청 URL
+		
+		String user_id=""; // SMS 아이디
+		String secure=""; //인증키
+		String msg=""; //전송 메세지
+		String rphone="";
+		String sphone1="";
+		String sphone2="";
+		String sphone3="";
+		String mode ="";
+		String testflag="";
+		String returnurl="";
+		String smsType ="";
+		try {
+			user_id = base64Encode("llpoikk");
+			secure = base64Encode("1fb649f8bfa046fa5bc20a3ce04cc321");//인증키
+			msg = base64Encode(nullcheck(sms.getMsg(), ""));
+			rphone = base64Encode(nullcheck(sms.getRphone(), ""));
+			sphone1 = base64Encode(nullcheck(sms.getSphone1(), ""));
+			sphone2 = base64Encode(nullcheck(sms.getSphone2(), ""));
+			sphone3 = base64Encode(nullcheck(sms.getSphone3(), ""));
+			mode = base64Encode("1");
+			 testflag = base64Encode(nullcheck(sms.getTestflag(), ""));
+			 returnurl = nullcheck(sms.getReturnurl(), "");
+			 smsType = base64Encode(nullcheck(sms.getSmsType(), ""));	 
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String[] host_info = sms_url.split("/");
+        String host = host_info[2];
+        String path = "/" + host_info[3];
+        int port = 80;
+		
+        // 데이터 맵핑 변수 정의
+        String arrKey[]
+            = new String[] {"user_id","secure","msg", "rphone","sphone1","sphone2","sphone3","mode","testflag", "smsType"};
+        
+        String valKey[]= new String[arrKey.length] ;
+        
+        valKey[0] = user_id;
+        valKey[1] = secure;
+        valKey[2] = msg;
+        valKey[3] = rphone;
+        valKey[4] = sphone1;
+        valKey[5] = sphone2;
+        valKey[6] = sphone3;
+        valKey[7] = mode;
+        valKey[8] = testflag;
+        valKey[9] = smsType;
+        
+        String boundary = "";
+        Random rnd = new Random();
+        String rndKey = Integer.toString(rnd.nextInt(32000));
+        MessageDigest md;
+        byte[] digest = null;
+		try {
+			md = MessageDigest.getInstance("MD5");
+			byte[] bytData = rndKey.getBytes();
+			md.update(bytData);			
+			digest = md.digest();
+			
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        for(int i =0;i<digest.length;i++)
+        {
+            boundary = boundary + Integer.toHexString(digest[i] & 0xFF);
+        }
+        boundary = "---------------------"+boundary.substring(0,11);
+		
+		return "";
+	}
+	
+  /**==============================================================
+    Description        :  사용 함수 선언
+  ==============================================================**/
+   /**
+   * nullcheck
+   * @param str, Defaultvalue
+   * @return
+   */
+   public static String nullcheck(String str,  String Defaultvalue ) throws Exception
+   {
+        String ReturnDefault = "" ;
+        if (str == null)
+        {
+            ReturnDefault =  Defaultvalue ;
+        }
+        else if (str == "" )
+       {
+            ReturnDefault =  Defaultvalue ;
+        }
+        else
+        {
+                    ReturnDefault = str ;
+        }
+         return ReturnDefault ;
+   }
+   
+   /**
+   * BASE64 Encoder
+   * @param str
+   * @return
+   */
+  public static String base64Encode(String str)  throws java.io.IOException {
+      BASE64Encoder encoder = new BASE64Encoder();
+      byte[] strByte = str.getBytes();
+      String result = encoder.encode(strByte);
+      return result ;
+  }
+
+  /**
+   * BASE64 Decoder
+   * @param str
+   * @return
+   */
+  public static String base64Decode(String str)  throws java.io.IOException {
+      BASE64Decoder decoder = new BASE64Decoder();
+      byte[] strByte = decoder.decodeBuffer(str);
+      String result = new String(strByte);
+      return result ;
+  }
+}

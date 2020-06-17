@@ -64,7 +64,7 @@ public class ProjectController {
 		logger.info("[ page : "+page+" ]");
 		
 		// 만약, 검색을 했으면
-		Boolean searchIs = (keyword==null)?true:false;
+		Boolean searchIs = (keyword==null||keyword=="")?true:false;
 		
 		
 		if(searchIs) {

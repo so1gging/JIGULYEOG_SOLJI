@@ -21,4 +21,6 @@ public interface DMBiz {
 
 	List<DMListDto> checkUnreadDM(String user_id);
 
+	Boolean insertDMChat(DMChatDto chat);
+
 }

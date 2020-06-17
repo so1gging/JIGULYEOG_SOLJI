@@ -1,6 +1,6 @@
 $(function(){
 	
-   var socket = io.connect("http://localhost:82");
+   var socket = io.connect("https://hidden-fjord-85200.herokuapp.com");
     var chatkey ="";
     var receiveId ="";
     var sendId = "";
@@ -32,6 +32,35 @@ $(function(){
          
          // 메세지를 보냄
          socket.emit("sendDM",{chatKey:chatkey, data:content,receive:receiveId,send:sendId});
+         
+         var param = {
+        		 "dm_key":chatkey,
+        		 "dm_host":sendId,
+        		 "send_id":sendId,
+        		 "receive_id":receiveId,
+        		 "dm_content":content
+         };
+         
+         $.ajax({
+        	 type:"post",
+        	 url:"insertDMChat.do",
+        	 data: JSON.stringify(param),
+        	 contentType:"application/json",
+			 dataType:"json",
+			 success:function(msg){
+				 if(msg.check==true){
+					 
+				 }else{
+					 alert("메세지 전송 오류 ! [해당 페이지를 새로고침 합니다.]");
+					  location.reload();
+				 }
+			 },
+			 error:function(){
+					alert("AJAX: 통신오류! [해당 페이지를 새로고침 합니다.]");
+					location.reload();
+					
+				}
+         });
     	
          $("#messageContent").val("");
          $("#chatLog").append(str);

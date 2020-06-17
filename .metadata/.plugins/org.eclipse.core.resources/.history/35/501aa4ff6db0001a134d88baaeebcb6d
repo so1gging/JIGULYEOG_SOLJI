@@ -1,0 +1,7 @@
+package com.mvc.jigulyeog.model.dto;
+
+public class SendSMS {
+	private int certiNumber; // 인증번호
+	
+	
+}

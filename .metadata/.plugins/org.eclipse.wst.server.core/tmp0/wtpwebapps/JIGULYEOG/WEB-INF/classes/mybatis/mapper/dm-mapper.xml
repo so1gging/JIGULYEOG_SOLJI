@@ -44,4 +44,9 @@
 		WHERE DM_HOST = #{user_id} AND DM_KEY = #{dm_key}
 	</delete>
 	
+	<insert id="insertDMChat" parameterType="DMChatDto">
+		INSERT INTO DM_CHAT
+		VALUES(DM_SEQUENCE.NEXTVAL,#{dm_key},#{dm_host},#{send_id},#{receive_id},#{dm_content},SYSDATE)
+	</insert>
+	
 </mapper>

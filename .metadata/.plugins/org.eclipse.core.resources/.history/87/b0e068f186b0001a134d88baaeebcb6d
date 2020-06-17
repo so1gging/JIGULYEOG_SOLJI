@@ -1,0 +1,22 @@
+package com.mvc.jigulyeog.model.dto;
+
+import java.util.UUID;
+
+public class SendSMS {
+	private String certiNumber; // 인증번호
+
+	public SendSMS() {
+		super();
+	}
+
+	public String getCertiNumber() {
+		this.certiNumber= UUID.randomUUID().toString().substring(0, 5);
+		return certiNumber;
+	}
+
+
+	
+	
+	
+	
+}

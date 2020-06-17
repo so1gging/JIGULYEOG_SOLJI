@@ -69,4 +69,16 @@ public class DMBizImpl implements DMBiz{
 		return is2;
 	}
 
+	@Override
+	public Boolean insertDMChat(DMChatDto chat) {
+		logger.info("[ DMBiz : insertDMChat ]");
+		Boolean is1 = dao.insertDMChat(chat);
+		
+		String dm_host = chat.getReceive_id();
+		chat.setDm_host(dm_host);
+		Boolean is2 = dao.insertDMChat(chat);
+		
+		return (is1&&is2)?true:false;
+	}
+
 }

@@ -39,14 +39,14 @@
     </style>
     
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-      <script src="http://localhost:82/socket.io/socket.io.js"></script>
+      <script src="https://hidden-fjord-85200.herokuapp.com/socket.io/socket.io.js"></script>
       <script type="text/javascript">
       	$(function(){
       		 var commNo ='<c:out value="${commNo}"/>';
       		 var userId ='<c:out value="${user.user_id}"/>';
       		 var userNick = '<c:out value="${user.user_nick}"/>';
       		 
-      		 var socket = io.connect("http://localhost:82");
+      		 var socket = io.connect("https://hidden-fjord-85200.herokuapp.com");
       		 
       		 // 입장
       		 socket.emit('join Chat', {commNo:commNo,userId:userId,userNick:userNick});
@@ -203,9 +203,5 @@
   <script src="${pageContext.request.contextPath}/resources/js/aos.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/jquery.animateNumber.min.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
- 
-      <!-- 
-     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/personal_js/commChat.js" ></script>
-    -->
   </body>
 </html>

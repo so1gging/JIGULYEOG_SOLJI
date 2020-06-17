@@ -144,5 +144,19 @@ public class DMDaoImpl implements DMDao{
 		return (res>0)?true:false;
 	}
 
+	@Override
+	public Boolean insertDMChat(DMChatDto chat) {
+		logger.info("[ DMDao : insertDMChat ]");
+		int res = 0;
+		try {
+			res = sqlSession.insert(NAMESPACE+"insertDMChat",chat);
+		} catch (Exception e) {
+			logger.info("[ DMDao error : insertDMChat ]");
+			e.printStackTrace();
+		}
+
+		return (res>0)?true:false;
+	}
+
 
 }

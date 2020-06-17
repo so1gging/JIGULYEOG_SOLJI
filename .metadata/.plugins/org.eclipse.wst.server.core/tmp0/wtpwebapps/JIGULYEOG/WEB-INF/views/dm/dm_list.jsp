@@ -158,7 +158,7 @@
   <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
   <!-- jQuery -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
- <script src="http://localhost:82/socket.io/socket.io.js"></script>
+ <script src="https://hidden-fjord-85200.herokuapp.com/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/personal_js/dmChat.js" ></script>
   
     

@@ -41,19 +41,23 @@ public class DMController {
 			return "redirect:index.do";
 		}
 		
-		List<DMListDto> DMList = dmb.getDMList(user.getUser_id());
+		List<DMListDto> DMList = dmb.getDMList(user.getUser_id()); // DM List를 가져온다.
 		// {'user01','user02'}
 		List<DMListDto> unreadDMList = dmb.checkUnreadDM(user.getUser_id());
 		// {'user01','user02','user03'}
-		logger.info(unreadDMList.toString());
+		logger.info("[ unreadDMList : "+unreadDMList.toString()+" ]");
 		
 		// 안읽은 메세지가 존재
 		if(DMList.size() != unreadDMList.size()) {
 			for(DMListDto dto1:unreadDMList) {
 				if(!DMList.contains(dto1)) {
 					// 가지고 있지 않으면,
+					// dmlist에 해당 친구를 추가해줘야 한다.
+					dmb.addDM(dto1.getUser_id(), dto1.getDm_id());
+					
 					logger.info("[ add DMList : "+dto1.getDm_key()+" ]");
-					DMList.add(dto1);
+					DMList = dmb.getDMList(user.getUser_id()); // DM List를 가져온다.
+					//DMList.add(dto1);
 				}
 			}
 		}
@@ -156,6 +160,19 @@ public class DMController {
 			return "redirect:dmlist.do";
 		}
 		
+	}
+	
+	@RequestMapping(value="insertDMChat.do",method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,Boolean> insertDMChat(@RequestBody DMChatDto chat){
+		logger.info("[ DMController : insertDMChat ]");
+		Boolean is = dmb.insertDMChat(chat);
+		
+		Map<String,Boolean> map = new HashMap<String, Boolean>();
+		
+		map.put("check",is);
+		
+		return map;
 	}
 	
 }

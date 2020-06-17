@@ -3,9 +3,9 @@ package com.mvc.jigulyeog.model.dto;
 import java.util.Date;
 
 public class DMChatDto {
-	private int dm_no;
+	private int dm_no; 
 	private String dm_key; 
-	private String dm_host; 
+	private String dm_host;
 	private String send_id;
 	private String receive_id;
 	private String dm_content;
@@ -123,11 +123,4 @@ public class DMChatDto {
 		return "DMChatDto [dm_no=" + dm_no + ", dm_key=" + dm_key + ", dm_host=" + dm_host + ", send_id=" + send_id
 				+ ", receive_id=" + receive_id + ", dm_content=" + dm_content + ", dm_date=" + dm_date + "]";
 	}
-	
-	
-	
-
-	
-	
-	
 }
