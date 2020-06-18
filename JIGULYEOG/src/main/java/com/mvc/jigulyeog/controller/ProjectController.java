@@ -57,18 +57,18 @@ public class ProjectController {
     }
 
 	
-	// project List
+	// ## 프로젝트 리스트 불러오기 ## //
 	@RequestMapping(value="/projectlist.do",method=RequestMethod.GET)
 	public String projectList(Model model,@RequestParam(value="page",required=false) Integer page,@RequestParam(value="category",required=false) Integer category,@RequestParam(value="keyword",required=false) String keyword) {
 		logger.info("[ ProjectController : projectList ]");
 		logger.info("[ page : "+page+" ]");
 		
-		// 만약, 검색을 했으면
+		// << 만약, 검색을 했으면 false, 하지 않았으면 true >>
 		Boolean searchIs = (keyword==null||keyword=="")?true:false;
 		
-		
+		// 검색 X
 		if(searchIs) {
-			// 최신 순
+			// 최신 순 (category : 1)
 			if(category==null||category==1) {
 				// 만약 page가 넘어오지 않았다면,
 				if(page==null) {
@@ -87,7 +87,7 @@ public class ProjectController {
 				model.addAttribute("category",1);
 				
 			}else if(category == 2) {
-				// 오래된 순
+				// 오래된 순 (category : 2)
 				
 				// 만약 page가 넘어오지 않았다면,
 				if(page==null) {
@@ -106,7 +106,7 @@ public class ProjectController {
 				model.addAttribute("category",2);
 						
 			}else if(category == 3) {
-				// 모금 순
+				// 모금 순 (category : 3)
 				
 				// 만약 page가 넘어오지 않았다면,
 				if(page==null) {
@@ -125,11 +125,14 @@ public class ProjectController {
 				model.addAttribute("category",3);		
 			}
 		}else {
-			// 검색을 했을 때
+			// 검색 O
 			
-			if(page==null) {page=1;}
+			// 만약 page가 넘어오지 않았다면,
+			if(page==null) {
+				page=1; // 첫 페이지를 보여준다.
+				}
 			
-			keyword=keyword.trim();
+			keyword=keyword.trim(); // 혹시 모를 공백 제거
 			
 			Paging paging = pb.projectPagingSearch(page,keyword); // Paging 설정
 			
@@ -142,12 +145,11 @@ public class ProjectController {
 			model.addAttribute("pageMaker",maker);
 			model.addAttribute("keyword",keyword);
 		}
-		
-		
+
 		return "/project/project_list";
 	}
 	
-	// project write form
+	// ## 프로젝트 작성 폼 보여주기 ## //
 	@RequestMapping("/projectwriteform.do")
 	public String projectWriteForm() {
 		logger.info("[ ProjectController : projectWriteForm ]");
@@ -155,7 +157,7 @@ public class ProjectController {
 		return "/project/project_writeform";
 	}
 	
-	// ckeditor을 이용한 사진 업로드
+	// ## ckeditor을 이용한 사진 업로드 ## //
 	@RequestMapping(value="/ckeditorProjectFileupload.do",method=RequestMethod.POST)
 	public String ckeditorProjectFileUpload(HttpServletRequest req,HttpServletResponse res,@RequestParam MultipartFile upload) throws IOException {
 		logger.info("[ ProjectController : ckeditorFileUpload ]");
@@ -233,7 +235,7 @@ public class ProjectController {
 	}
 	
 
-	// project Write!
+	// ## 프로젝트 작성 기능 ## //
 	@RequestMapping(value="/projectwrite.do",method=RequestMethod.POST)
 	public void projectWrite(ProjectDto project,HttpServletRequest request,HttpServletResponse response,@RequestParam("file") MultipartFile file) {
 		response.setContentType("text/html; charset=utf-8");
@@ -260,7 +262,7 @@ public class ProjectController {
 		}
 	}
 	
-	// project detail form
+	// ## 프로젝트 상세 폼 ## //
 	@RequestMapping("/projectdetail.do")
 	public String projectDetail(@RequestParam("pro_num") Integer pro_num,Model model,HttpSession session) {
 		logger.info("[ ProjectController : projectDetail ]");
@@ -273,7 +275,7 @@ public class ProjectController {
 		
 		Boolean fundingChk = false; // 기부 여부
 		
-		// login check
+		// User 기부 여부 확인 (추 후, 중복 기부를 위함)
 		if(session.getAttribute("user")!=null) {
 			UserDto user = (UserDto) session.getAttribute("user");
 			logger.info("[ login user : "+user.getUser_id()+" ]");
@@ -309,28 +311,29 @@ public class ProjectController {
 	}
 	
 	
-	// project update form
+	// ## 프로젝트 수정 폼 보여주기 ## //
 	@RequestMapping("/projectupdateform.do")
 	public String projectUpdateForm(@RequestParam("pro_num") int pro_num,Model model) {
 		logger.info("[ ProjectController : projectUpdateForm ]");
 		logger.info("[ pro_num : "+pro_num+" ]");
 		
-		ProjectDto project = pb.getProjectOne(pro_num);
+		ProjectDto project = pb.getProjectOne(pro_num); // 해당 project info
 		model.addAttribute("project", project);
 		
 		return "/project/project_updateform";
 	} 
 	
-	// project update
+	// ## 프로젝트 수정 기능 ## //
 	@RequestMapping("/projectupdate.do")
 	public void projectUpdate(ProjectDto project,HttpServletRequest request,HttpServletResponse response,@RequestParam(value="file",required=false) MultipartFile file) {
 		response.setContentType("text/html; charset=utf-8");
 		logger.info("[ ProjectController : projectUpdate ]");
 		
-		logger.info("file not changed? : "+file.isEmpty());
+		logger.info("file not changed? : "+file.isEmpty()); // 대표이미지 수정 여부를 알기 위함
 		
-		// 대표이미지 설정 X ==> 그대로 유지
+		// file.isEmpty() ==> true : 대표이미지 수정 X & file.isEmpty() ==> false : 대표이미지 수정
 		if(!file.isEmpty()) {
+			// 대표이미지 수정 O
 			String pro_image = pb.projectfileUpload(file, request); // 다시 설정
 			if(pro_image!="") {
 				logger.info("[ ProjectController : Success setting Image ]");
@@ -355,7 +358,7 @@ public class ProjectController {
 		
 	}
 	
-	// project delete
+	// ## 프로젝트 삭제 기능 ## //
 	@RequestMapping("/projectdelete.do")
 	public void projectDelete(@RequestParam int pro_num,HttpServletRequest request,HttpServletResponse response) {
 		response.setContentType("text/html; charset=utf-8");
@@ -372,7 +375,6 @@ public class ProjectController {
 		}
 		
 	}
-	
 	
 	private void jsResponse(String msg,String url,HttpServletResponse response) throws IOException {
 		

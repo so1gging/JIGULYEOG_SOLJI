@@ -7,29 +7,31 @@
 	<!-- Notice board Paging -->
 	
 	<!-- Paging : totalNotice -->
-	<select id="totalNotice" resultType="int">
+	<select id="totalNotice" resultType="int" parameterType="int">
 		SELECT COUNT(*)
 		FROM COMMUNITY_NOTICE
+		WHERE COM_NUM=#{com_num}
 	</select>
 	
 	<!-- Paging : getNoticeList -->
 	<select id="getNoticeList" resultType="CommunityNoticeDto" parameterType="java.util.HashMap">
 		SELECT C.NOTICE_NUM, C.COM_NUM, C.NOTICE_TITLE, C.NOTICE_CONTENT,C.NOTICE_DATE, C.NOTICE_VIEW
 		FROM (SELECT ROWNUM RN, COMM_NOTICE_TB.*
-		        FROM (SELECT * FROM COMMUNITY_NOTICE ORDER BY NOTICE_NUM DESC) COMM_NOTICE_TB ) C
+		        FROM (SELECT * FROM COMMUNITY_NOTICE WHERE COM_NUM=#{com_num} ORDER BY NOTICE_NUM DESC) COMM_NOTICE_TB ) C
 		WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<!-- Guestbook Paging -->
-	<select id="totalGuestbook" resultType="int">
+	<select id="totalGuestbook" resultType="int" parameterType="int">
 		SELECT COUNT(*)
 		FROM COMMUNITY_GUESTBOOK
+		WHERE COM_NUM=#{com_num}
 	</select>
 	
 	<select id="getGuestbookList" resultType="CommunityGuestbookDto" parameterType="java.util.HashMap">
 		SELECT G.CATION_NUM,G.COM_NUM,G.USER_ID,G.CATION_CONTENT,G.CATION_DATE
 		FROM (SELECT ROWNUM RN, COMM_GUEST_TB.*
-		        FROM (SELECT * FROM COMMUNITY_GUESTBOOK ORDER BY CATION_NUM DESC) COMM_GUEST_TB ) G
+		        FROM (SELECT * FROM COMMUNITY_GUESTBOOK WHERE COM_NUM=#{com_num} ORDER BY CATION_NUM DESC) COMM_GUEST_TB ) G
 		WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
@@ -81,6 +83,11 @@
 		SET NOTICE_TITLE=#{notice_title} , NOTICE_CONTENT=#{notice_content}
 		WHERE NOTICE_NUM=#{notice_num}
 	</update>
+	
+	<delete id="noticeDelete" parameterType="int">
+		DELETE FROM COMMUNITY_NOTICE
+		WHERE NOTICE_NUM=#{notice_num}	
+	</delete>
 	
 	<update id="countViewNotice" parameterType="int">
 		UPDATE COMMUNITY_NOTICE

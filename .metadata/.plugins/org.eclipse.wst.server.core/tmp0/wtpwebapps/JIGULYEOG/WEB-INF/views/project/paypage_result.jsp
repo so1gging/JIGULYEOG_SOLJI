@@ -63,9 +63,11 @@
     <div class="site-section">
         <div class="container">
             <div class="steps">
-                <li class="fleft" id="stepslijs1"><b>01</b>기부 신청서 작성</li>
+                <li class="fleft" id="stepslijs1"><b>01</b>본인 인증</li>
                 <img src="${pageContext.request.contextPath}/resources/css/personal_css/payment_page/pay_icon_next.png">
-                <li class="on fleft" id="stepslijs2"><b>02</b>기부 완료</li>
+                <li class="fleft" id="stepslijs1"><b>02</b>기부 신청서 작성</li>
+                <img src="${pageContext.request.contextPath}/resources/css/personal_css/payment_page/pay_icon_next.png">
+                <li class="on fleft" id="stepslijs2"><b>03</b>기부완료</li>
             </div>
 
             <div class="mt-3 rootForm" style="text-align: center; padding: 30px 10px 30px 10px;">
@@ -76,7 +78,7 @@
                   귀하의 기부금은 해당 프로젝트에 많은 기여가 될 것 입니다.<br>
                   앞으로의 프로젝트 소식들은 해당 환경단체 커뮤니티에서 확인하실 수 있습니다.<br>
 
-                  <input type="button" class="btn btn-success mt-3" style="width: 300px;" onclick="location.href='community.do?pro_num=${pro_num}'" value="커뮤니티 입장하기">
+                  <input type="button" class="btn btn-success mt-3" style="width: 300px;" onclick="location.href='createcomm.do?pro_num=${pro_num}'" value="커뮤니티 입장하기">
                 </p>
               </div>
             </div>

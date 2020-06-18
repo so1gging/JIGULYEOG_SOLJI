@@ -36,8 +36,9 @@ public class FundingController {
 		logger.info("[ pro_num : "+pro_num+" ]");
 		
 		model.addAttribute("pro_num", pro_num);
-		
-		if(overlap!=null) {model.addAttribute("overlap",overlap);}
+		if(overlap!=null) {
+			if(overlap.equals("true")) {model.addAttribute("overlap","true");}			
+		}
 
 		return "/project/paypage_certification";
 	}
@@ -49,8 +50,9 @@ public class FundingController {
 		
 		ProjectDto project = pb.getProjectOne(pro_num);
 		model.addAttribute("project",project);
-		
-		if(overlap!=null) {model.addAttribute("overlap",true);}
+		if(overlap!=null) {
+			if(overlap.equals("true")) {model.addAttribute("overlap","true");}		
+		}
 
 		return "/project/paypage";
 	}
@@ -65,10 +67,12 @@ public class FundingController {
 		Boolean is = false;
 		
 		//처음 기부
-		if(overlap==null||overlap=="") {
+		if(overlap==null||overlap==""||overlap.equals("false")) {
+			logger.info("[ first donate ]");
 			is = fb.fundingProcess(sponser);			
 		}else {
 			//중복기부
+			logger.info("[ overlap donate ]");
 			is = fb.fundingProcessOverlap(sponser);
 		}
 

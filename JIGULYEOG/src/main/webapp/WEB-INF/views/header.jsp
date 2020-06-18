@@ -38,6 +38,7 @@
 	          		<a class="dropdown-item" href="myPage.do">유저 마이페이지</a>
 	          		<a class="dropdown-item" href="myDonate.do">유저 후원페이지</a>
 	          		<a class="dropdown-item" href="myAction.do">유저 내활동페이지</a>
+	          		<a class="dropdown-item" href="dmlist.do">DM 목록</a>	          		
 	          		<a class="dropdown-item" href="secession.do">탈퇴페이지</a>
 	          	</div>
 	          <li>    

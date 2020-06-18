@@ -98,12 +98,12 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 
 	@Override
-	public int totalNotice() {
+	public int totalNotice(int com_num) {
 		logger.info("[ CommunityDao : totalNotice ]");
 		int totalNotice = 0;
 		
 		try {
-			totalNotice = sqlSession.selectOne(NAMESPACE+"totalNotice");
+			totalNotice = sqlSession.selectOne(NAMESPACE+"totalNotice",com_num);
 		}catch (Exception e) {
 			logger.info("[ error :totalNotice ]");
 			e.getStackTrace();
@@ -113,12 +113,13 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 
 	@Override
-	public List<CommunityNoticeDto> getNoticeList(int startRow, int endRow) {
+	public List<CommunityNoticeDto> getNoticeList(int startRow, int endRow,int com_num) {
 		logger.info("[ CommunityDao : getNoticeList ]");
 		List<CommunityNoticeDto> getNoticeList = new ArrayList<CommunityNoticeDto>();
 		
 		Map<String,Integer> param = new HashMap<String,Integer>();
 		
+		param.put("com_num", com_num);
 		param.put("startRow", startRow);
 		param.put("endRow", endRow);
 		
@@ -162,6 +163,21 @@ public class CommunityDaoImpl implements CommunityDao{
 		return (res>0)?true:false;
 	}
 	
+
+	@Override
+	public Boolean commNoticeDelete(Integer notice_num) {
+		logger.info("[ CommunityDao : commNoticeDelete ]");
+		int res = 0;
+		try {
+			res = sqlSession.update(NAMESPACE+"noticeDelete",notice_num);
+		} catch (Exception e) {
+			logger.info("[ error : commNoticeDelete ]");
+			e.getStackTrace();
+		}
+		return (res>0)?true:false;
+	}
+
+	
 	@Override
 	public void countViewNotice(Integer notice_num) {
 		logger.info("[ CommunityDao : countViewNotice ]");
@@ -177,12 +193,12 @@ public class CommunityDaoImpl implements CommunityDao{
 	}
 
 	@Override
-	public int totalGuestbook() {
+	public int totalGuestbook(int com_num) {
 		logger.info("[ CommunityDao : totalGuestbook ]");
 		int totalGuestbook = 0;
 		
 		try {
-			totalGuestbook = sqlSession.selectOne(NAMESPACE+"totalGuestbook");
+			totalGuestbook = sqlSession.selectOne(NAMESPACE+"totalGuestbook",com_num);
 		}catch (Exception e) {
 			logger.info("[ error :totalGuestbook ]");
 			e.getStackTrace();
@@ -193,12 +209,13 @@ public class CommunityDaoImpl implements CommunityDao{
 	
 	
 	@Override
-	public List<CommunityGuestbookDto> getGuestbookList(int startRow, int endRow) {
+	public List<CommunityGuestbookDto> getGuestbookList(int startRow, int endRow,int com_num) {
 		logger.info("[ CommunityDao : getGuestbookList ]");
 		List<CommunityGuestbookDto> getGuestbookList = new ArrayList<CommunityGuestbookDto>();
 		
 		Map<String,Integer> param = new HashMap<String,Integer>();
 		
+		param.put("com_num", com_num);
 		param.put("startRow", startRow);
 		param.put("endRow", endRow);
 		
@@ -253,7 +270,5 @@ public class CommunityDaoImpl implements CommunityDao{
 		}
 		return (res>0)?true:false;
 	}
-
-	
 
 }

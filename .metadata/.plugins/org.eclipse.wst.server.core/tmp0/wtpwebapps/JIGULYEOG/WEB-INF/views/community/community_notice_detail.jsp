@@ -90,6 +90,8 @@
             <td colspan="2" style="text-align: right;">
             	 <c:if test="${user.user_id eq project.user_id }">
 		              <input type="button" class="btn btn-success" value="수정" onclick ="location.href='noticeupdateform.do?notice_num=${notice.notice_num}&pro_num=${project.pro_num}'" style="display: inline-block;">
+		              <input type="button" class="btn btn-success" value="삭제" onclick ="location.href='noticedelete.do?notice_num=${notice.notice_num}&pro_num=${project.pro_num}'" style="display: inline-block;">
+		              
             	 </c:if>
               <input type="button" value="목록" class="btn btn-success" onclick="location.href='community.do?pro_num=${project.pro_num}'" style="display: inline-block;">
             </td>

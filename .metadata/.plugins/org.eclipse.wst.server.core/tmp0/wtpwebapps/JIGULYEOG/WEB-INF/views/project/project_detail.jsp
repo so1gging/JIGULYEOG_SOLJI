@@ -39,6 +39,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 	
+	// ## donate page 로 이동 하기 전 체크 ## //
 		function donateForm(){
 			var chk = '<c:out value="${fundingChk }"/>';
 			if(chk == 'true'){
@@ -54,21 +55,20 @@
 			}
 		}
 	
-		// show update Form
+	// ## show cheerMsg update Form ## //
 		function updateForm(i){
 			$(".default"+i+"").css({"display":"none"});
 			$(".update"+i+"").css({"display":"block"});
 		}
 		
-		// show rollback
+	// ## rollback cheerMsg update Form ## //
 		function rollbackUpdate(i){
 			$(".update"+i+"").css({"display":"none"});			
 			$(".default"+i+"").css({"display":"block"});
 		}
 		
-		// update Masg
-		function updateMsg(i){
-			
+	// ## cheerMsg update ## //
+		function updateMsg(i){	
 			var formName = "upform"+i;
 			var cheer_content = document.forms[formName].elements["cheer_content"].value;
 			var param = {
@@ -101,7 +101,7 @@
 			
 		}
 		
-		// delete Msg
+	// ## cheerMsg delete ## //
 		function delCheerMsg(i){
 			var param = {"cheer_num":i};
 			$.ajax({
@@ -128,18 +128,16 @@
 		}
 	
 
-		// paging Cheer Msg
+	// ## cheerMsg Paging ## //
 		function pagingCheerMsg(page){
 			// 초기화
 			$("#cheerMsgForm").html("");
 			$("#msgPaging").html("");
 			
-			
 			var pro_num = '<c:out value="${project.pro_num}"/>';
 			var currUser = '<c:out value="${user.user_id}"/>';
 			var param = {"pro_num":pro_num};
 			
-	
 			// cheerMsg 가져오기
 			$.ajax({
 				type:"post",
@@ -210,7 +208,7 @@
 						
 						$("#cheerMsgForm").append(str);
 						
-						//페이징
+						// Page Maker
 						var msgPaging = "";
 		                msgPaging += '<nav aria-label="Page navigation">';
 		                msgPaging += '<ul class="pagination">';
@@ -253,10 +251,10 @@
 		
 		$(function(){
 			
-			//처음 로딩
+			// ## 처음 로딩시 응원메세지 페이징해서 가져온다.
 			pagingCheerMsg(1);
 			
-			// 응원메세지 작성 기능
+			// ## cheerMsg 작성 버튼 클릭 시 ## //
 			$("#submitMsg").click(function(){
 				var pro_num = '<c:out value="${project.pro_num}"/>';
 				var user_id = '<c:out value="${user.user_id}"/>';

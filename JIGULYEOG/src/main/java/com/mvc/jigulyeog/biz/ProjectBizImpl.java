@@ -29,7 +29,7 @@ public class ProjectBizImpl implements ProjectBiz{
 	@Autowired
 	ProjectDao dao;
 	
-	// file upload
+	// ## 이미지 파일 업로드 ## //
 	@Override
 	public String projectfileUpload(MultipartFile file,HttpServletRequest request) {
 		logger.info("[ ProjectBiz : projectfileUpload ]");
@@ -67,7 +67,7 @@ public class ProjectBizImpl implements ProjectBiz{
 	         // 경로 존재 여부
 	         if(!renameFile.exists()) {
 	        	 // 만약 존재하지 않는다면,
-	        	 renameFile.mkdir(); // savePath 생성
+	        	 renameFile.mkdirs(); // savePath 생성
 	         }
 	         
 	         // 해당 경로에 파일 생성
@@ -103,14 +103,14 @@ public class ProjectBizImpl implements ProjectBiz{
 		
 	}
 
-	// project write
+	// ## 프로젝트 작성 ## //
 	@Override
 	public boolean projectWrite(ProjectDto project) {
 		logger.info("[ ProjectBiz : projectWrite ]");
 		return dao.projectWrite(project);
 	}
 	
-	// project paging
+	// ## Paging : 초기 설정 ## //
 	@Override
 	public Paging projectPaging(Integer page) {
 		logger.info("[ ProjectBiz : projectPaging ]");
@@ -135,7 +135,7 @@ public class ProjectBizImpl implements ProjectBiz{
 	}
 	
 
-	// get project list
+	// ## Paging : 프로젝트 리스트 가져오기 ## //
 	@Override
 	public List<ProjectDto> projectList(Paging paging) {
 		logger.info("[ ProjectBiz : projectList ]");
@@ -164,7 +164,7 @@ public class ProjectBizImpl implements ProjectBiz{
 	}
 
 	
-	// project paging maker
+	// ## Paging : page Maker ## //
 	@Override
 	public PageMaker getPageMaker(Paging paging) {
 		logger.info("[ ProjectBiz : getPageMaker ]");
@@ -173,7 +173,7 @@ public class ProjectBizImpl implements ProjectBiz{
 		return maker;
 	}
 
-	// get project one
+	// ## get project one ## //
 	@Override
 	public ProjectDto getProjectOne(int pro_num) {
 		logger.info("[ ProjectBiz : getProjectOne ]");
@@ -181,28 +181,28 @@ public class ProjectBizImpl implements ProjectBiz{
 	}
 
 	
-	// get org one
+	// ## get org one ## //
 	@Override
 	public OrgDto getProjectOneOrg(String user_id) {
 		logger.info("[ ProjectBiz : getProjectOneOrg ]");		
 		return dao.getProjectOneOrg(user_id);
 	}
 
-	// project update
+	// ## project update ## //
 	@Override
 	public boolean projectUpdate(ProjectDto project) {
 		logger.info("[ ProjectBiz : projectUpdate ]");		
 		return dao.projectUpdate(project);
 	}
 
-	// project delete
+	// ## project delete ##//
 	@Override
 	public boolean projectDelete(int pro_num) {
 		logger.info("[ ProjectBiz : projectDelete ]");	
 		return dao.projectDelete(pro_num);
 	}
 
-	// project search
+	// ## project search ## //
 	@Override
 	public List<ProjectDto> projectSearch(Paging paging,String keyword) {
 		logger.info("[ ProjectBiz : projectSearch ]");
@@ -214,7 +214,7 @@ public class ProjectBizImpl implements ProjectBiz{
 
 	@Override
 	public Paging projectPagingSearch(Integer page,String keyword) {
-		logger.info("[ ProjectBiz : projectPaging ]");
+		logger.info("[ ProjectBiz : projectPagingSearch ]");
 		Paging paging = new Paging();
 		
 		paging.setPage(page);

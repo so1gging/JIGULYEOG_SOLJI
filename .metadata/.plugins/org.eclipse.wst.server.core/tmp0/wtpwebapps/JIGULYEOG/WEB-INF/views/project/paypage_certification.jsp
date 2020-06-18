@@ -41,7 +41,6 @@
   	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 	<script type="text/javascript">
 		$(function(){
-			
 			// ## sms 전송을 위해 User Default Phone Number Setting (필수) ## //
 			var userTel = '<c:out value="${user.user_phone}"/>';	
 			var code;

@@ -57,7 +57,7 @@ public class CommunityBizImpl implements CommunityBiz{
 	}
 
 	@Override
-	public Paging noticePaging(Integer nPage) {
+	public Paging noticePaging(Integer nPage,int com_num) {
 		logger.info("[ CommunityBiz : noticePaging ]");
 		
 		// [1] Create a paging object
@@ -67,7 +67,7 @@ public class CommunityBizImpl implements CommunityBiz{
 		paging.setPage(nPage);
 		
 		// [3] Get total Article count.
-		int totalArticle = dao.totalNotice();
+		int totalArticle = dao.totalNotice(com_num);
 		
 		// [4] Set total Article count.
 		paging.setTotalArticle(totalArticle);
@@ -85,9 +85,9 @@ public class CommunityBizImpl implements CommunityBiz{
 	}
 
 	@Override
-	public List<CommunityNoticeDto> noticeList(Paging paging) {
+	public List<CommunityNoticeDto> noticeList(Paging paging,int com_num) {
 		logger.info("[ CommunityBiz : noticeList ]");
-		List<CommunityNoticeDto> NList = dao.getNoticeList(paging.getStartRow(), paging.getEndRow());
+		List<CommunityNoticeDto> NList = dao.getNoticeList(paging.getStartRow(), paging.getEndRow(),com_num);
 		return NList;
 	}
 
@@ -111,6 +111,14 @@ public class CommunityBizImpl implements CommunityBiz{
 		logger.info("[ CommunityBiz : commNoticeUpdate ]");
 		return dao.commNoticeUpdate(notice);
 	}
+	
+	@Override
+	public Boolean commNoticeDelete(Integer notice_num) {
+		logger.info("[ CommunityBiz : commNoticeDelete ]");
+		
+		return dao.commNoticeDelete(notice_num);
+	}
+	
 	@Override
 	public void countViewNotice(Integer notice_num) {
 		logger.info("[ CommunityBiz  : countViewNotice ]");
@@ -119,7 +127,7 @@ public class CommunityBizImpl implements CommunityBiz{
 
 
 	@Override
-	public Paging guestbookPaging(Integer gPage) {
+	public Paging guestbookPaging(Integer gPage,int com_num) {
 		logger.info("[ CommunityBiz : guestbookPaging ]");
 		
 		// [1] Create a paging object
@@ -130,7 +138,7 @@ public class CommunityBizImpl implements CommunityBiz{
 		paging.setPage(gPage);
 		
 		// [3] Get total Article count.
-		int totalArticle = dao.totalGuestbook();
+		int totalArticle = dao.totalGuestbook(com_num);
 		
 		// [4] Set total Article count.
 		paging.setTotalArticle(totalArticle);
@@ -148,9 +156,9 @@ public class CommunityBizImpl implements CommunityBiz{
 	}
 	
 	@Override
-	public List<CommunityGuestbookDto> guestbookList(Paging gPaging) {
+	public List<CommunityGuestbookDto> guestbookList(Paging gPaging,int com_num) {
 		logger.info("[ CommunityBiz : guestbookList ]");
-		List<CommunityGuestbookDto> GList = dao.getGuestbookList(gPaging.getStartRow(), gPaging.getEndRow());
+		List<CommunityGuestbookDto> GList = dao.getGuestbookList(gPaging.getStartRow(), gPaging.getEndRow(),com_num);
 		return GList;
 	}
 
@@ -171,5 +179,6 @@ public class CommunityBizImpl implements CommunityBiz{
 		logger.info("[ CommunityBiz : commGuestbookDelete ]");
 		return dao.commGuestbookDelete(cation_num);
 	}
+
 
 }

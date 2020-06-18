@@ -62,7 +62,7 @@ public class MemberBizImpl implements MemberBiz {
 	         // 경로 존재 여부
 	         if(!renameFile.exists()) {
 	        	 // 만약 존재하지 않는다면,
-	        	 renameFile.mkdir(); // savePath 생성
+	        	 renameFile.mkdirs(); // savePath 생성
 	         }
 	         
 	         // 해당 경로에 파일 생성

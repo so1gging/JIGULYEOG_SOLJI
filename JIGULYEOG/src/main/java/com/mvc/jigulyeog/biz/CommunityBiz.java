@@ -22,9 +22,9 @@ public interface CommunityBiz {
 
 	Boolean commNoticeWrite(CommunityNoticeDto notice);
 
-	Paging noticePaging(Integer nPage);
+	Paging noticePaging(Integer nPage,int com_num);
 
-	List<CommunityNoticeDto> noticeList(Paging paging);
+	List<CommunityNoticeDto> noticeList(Paging paging, int commNo);
 
 	PageMaker getPageMaker(Paging paging);
 
@@ -32,16 +32,19 @@ public interface CommunityBiz {
 
 	Boolean commNoticeUpdate(CommunityNoticeDto notice);
 
+	Boolean commNoticeDelete(Integer notice_num);
+
 	void countViewNotice(Integer notice_num);
 
-	List<CommunityGuestbookDto> guestbookList(Paging gPaging);
+	List<CommunityGuestbookDto> guestbookList(Paging gPaging,int com_num);
 
-	Paging guestbookPaging(Integer gPage);
+	Paging guestbookPaging(Integer gPage,int com_num);
 
 	Boolean commGuestbookWrite(CommunityGuestbookDto guestbook);
 
 	Boolean commGuestbookUpdate(CommunityGuestbookDto guestbook);
 
 	Boolean commGuestbookDelete(int cation_num);
+
 	
 }

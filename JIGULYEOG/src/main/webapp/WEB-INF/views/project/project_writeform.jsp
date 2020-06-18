@@ -49,6 +49,7 @@
 	}
 		
 	$(function(){
+		// ## 작성버튼 클릭시 ## //
 		$("#submitBtn").click(function(){
 			var pro_title = $("#pro_title").val();
 			var pro_start_date = $("#pro_start_date").val();

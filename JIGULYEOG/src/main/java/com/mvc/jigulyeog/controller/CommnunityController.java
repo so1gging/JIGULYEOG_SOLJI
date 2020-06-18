@@ -89,9 +89,9 @@ public class CommnunityController {
 			nPage = 1;
 		}
 		
-		Paging nPaging = cb.noticePaging(nPage);
+		Paging nPaging = cb.noticePaging(nPage,commNo);
 		
-		List<CommunityNoticeDto> NList = cb.noticeList(nPaging);
+		List<CommunityNoticeDto> NList = cb.noticeList(nPaging,commNo);
 		PageMaker noticeMaker = cb.getPageMaker(nPaging);
 		
 		
@@ -109,8 +109,8 @@ public class CommnunityController {
 			gPage = 1;
 		}
 		
-		Paging gPaging = cb.guestbookPaging(gPage);
-		List<CommunityGuestbookDto> GList = cb.guestbookList(gPaging);		
+		Paging gPaging = cb.guestbookPaging(gPage,commNo);
+		List<CommunityGuestbookDto> GList = cb.guestbookList(gPaging,commNo);		
 		PageMaker guestbookMaker = cb.getPageMaker(gPaging);
 		
 		model.addAttribute("GList",GList);
@@ -272,6 +272,22 @@ public class CommnunityController {
 			catch (IOException e) {e.printStackTrace();}
 		}else {
 			try {jsResponse("공지사항 수정 실패","noticedetail.do?notice_num="+notice.getNotice_num()+"&pro_num="+pro_num,response);}
+			catch (IOException e) {e.printStackTrace();}			
+		}
+		
+	}
+	@RequestMapping(value="/noticedelete.do")
+	public void commNoticeDelete(HttpServletResponse response, @RequestParam("pro_num")Integer pro_num,@RequestParam("notice_num")Integer notice_num) {
+		logger.info("[ CommnunityController : noticeUpdate ]");
+		response.setContentType("text/html; charset=utf-8");
+		
+		Boolean is = cb.commNoticeDelete(notice_num);
+		
+		if(is==true) {
+			try {jsResponse("공지사항이 삭제되었습니다.","community.do?pro_num="+pro_num,response);}
+			catch (IOException e) {e.printStackTrace();}
+		}else {
+			try {jsResponse("공지사항 삭제 실패","community.do?pro_num="+pro_num,response);}
 			catch (IOException e) {e.printStackTrace();}			
 		}
 		

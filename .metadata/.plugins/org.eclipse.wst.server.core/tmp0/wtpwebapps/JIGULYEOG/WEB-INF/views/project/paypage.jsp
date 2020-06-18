@@ -50,6 +50,7 @@
     	        var msg;
     	        var pub_pay_uid;
 
+    	        // ## 기부버튼 클릭시 ## //
                 $(".donatebtn").click(function(){  	
                 	// 유효성 체크
                     var d_name = $('#donateName').val();
@@ -93,7 +94,7 @@
                     		"funded_money":funded_money
                     };
 
-                    // 결제 API                  
+                    // ## 결제 API                  
                     IMP.request_pay({
                         pg : 'html5_inicis', // version 1.1.0부터 지원.
                         pay_method : payVal,
@@ -181,9 +182,11 @@
     <div class="site-section">
         <div class="container">
             <div class="steps">
-                <li class="on fleft" id="stepslijs1"><b>01</b>기부 신청서 작성</li>
+                <li class="fleft" id="stepslijs1"><b>01</b>본인 인증</li>
                 <img src="${pageContext.request.contextPath}/resources/css/personal_css/payment_page/pay_icon_next.png">
-                <li class="fleft" id="stepslijs2"><b>02</b>기부완료</li>
+                <li class="on fleft" id="stepslijs1"><b>02</b>기부 신청서 작성</li>
+                <img src="${pageContext.request.contextPath}/resources/css/personal_css/payment_page/pay_icon_next.png">
+                <li class="fleft" id="stepslijs2"><b>03</b>기부완료</li>
             </div>
 
             <div class="row mt-3 rootForm">

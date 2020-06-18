@@ -52,6 +52,7 @@
 		
 	$(function(){
 
+		// ## 수정버튼 클릭시 ## //
 		$("#submitBtn").click(function(){
 			var pro_title = $("#pro_title").val();
 			var pro_start_date = $("#pro_start_date").val();
@@ -62,17 +63,12 @@
 			var today = new Date();
 			today = getFormatDate(today);
 			
+			// ## 유효성 체크
+			
 			if(pro_title == "" || pro_title == null){
 				alert('프로젝트 제목을 입력해주세요.');
 				return false;
 			}
-			
-			/*
-			if(today != pro_start_date){
-				alert('모금 시작 날짜는 오늘 날짜여야 합니다.');
-				return false;
-			}
-			*/
 			
 			if(pro_start_date > pro_due_date){
 				alert('모금 시작 날짜가 모금 마감 날짜보다 늦을 수 없습니다.');

@@ -11,14 +11,10 @@ public class DMChatDto {
 	private String dm_content;
 	private Date dm_date;
 	
-	
-	
 	public DMChatDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
 
 	public DMChatDto(int dm_no, String dm_key, String dm_host, String send_id, String receive_id, String dm_content,
 			Date dm_date) {
