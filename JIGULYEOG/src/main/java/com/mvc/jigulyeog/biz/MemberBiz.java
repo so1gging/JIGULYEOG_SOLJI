@@ -12,9 +12,12 @@ public interface MemberBiz {
 	String userfileUpload(MultipartFile file,HttpServletRequest request, UserDto user);
 	
 	public UserDto login(UserDto user);
+	public UserDto snslogin(String user_id);
 	public int regist_user(UserDto user);
+	public int regist_org(UserDto user);
 	public UserDto searchId(UserDto user);
 	public UserDto searchPw(UserDto user);
 	public int idCheck(String user_id);
 	public int nickCheck(String user_nick);
+	public int insertSNS(UserDto user);
 }

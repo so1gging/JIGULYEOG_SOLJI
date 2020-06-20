@@ -35,7 +35,7 @@
   		//모든 공백 체크 정규식
   		var empJ = /\s/g;
   		//아이디 정규식 
-  		var idJ = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+  		var idJ = /^[a-z0-9][a-z0-9_\-]{3,19}$/;
   		// 비밀번호 정규식
   		var pwJ = /^[A-Za-z0-9]{4,12}$/;
   		
@@ -270,7 +270,7 @@
         <div class="col-md-6 pr-md-5" style="margin: 0 auto;">
           <form action="registUser.do" method="POST" enctype="multipart/form-data" id="usercheck">
             <div class="form-group joinbox">
-              <input type="text" class="form-control px-3 py-3 join_input" placeholder="ID" style="width: 500px;" name="user_id" id="user_id">
+              <input type="text" class="form-control px-3 py-3 join_input" placeholder="ID" style="width: 500px;" name="user_id" id="user_id" value="${userInfo }">
               <div class="check_text" id="id_check"></div>
             </div>
             <div class="form-group joinbox">

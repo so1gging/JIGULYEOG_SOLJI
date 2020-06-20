@@ -23,3 +23,6 @@
 6월 17, 2020 13:58:49.02 NEW SESSION
 6월 17, 2020 13:58:49.02 [14172:3720:0617/135849.022:ERROR:socket_stream.cc(218)] Closing stream with result -2
 6월 17, 2020 14:04:47.30 [14172:4620:0617/140447.307:ERROR:backend_impl.cc(1041)] Critical error found -8
+
+6월 18, 2020 19:05:38.18 NEW SESSION
+6월 18, 2020 19:05:38.18 [6876:3492:0618/190538.148:ERROR:socket_stream.cc(218)] Closing stream with result -2

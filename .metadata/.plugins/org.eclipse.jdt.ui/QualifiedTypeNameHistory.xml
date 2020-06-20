@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.CheerMessageBiz"/>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.CheerMessageDao"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.FundingBizImpl"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.FundingDao"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 </qualifiedTypeNameHistroy>

@@ -10,8 +10,22 @@
 		AND USER_PW=#{user_pw}
 	</select>
 	
+	<select id="snslogin" parameterType="String" resultType="UserDto">
+		SELECT USER_ID, USER_PW, USER_NAME, USER_NICK, USER_PHONE, USER_ADDR, USER_PIC, USER_STATUS
+		FROM USER_TB
+		WHERE USER_ID=#{user_id}
+	</select>
+	
 	<insert id="regist_user" parameterType="UserDto">
   		INSERT INTO USER_TB VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_nick}, #{user_phone}, #{user_addr}, #{user_pic}, 0)
+  	</insert>
+  	
+  	<insert id="regist_org" parameterType="UserDto">
+  		INSERT INTO USER_TB VALUES(#{user_id}, #{user_pw}, #{user_name}, #{user_nick}, #{user_phone}, #{user_addr}, #{user_pic}, 1)
+  	</insert>
+  	
+  	<insert id="insertSNS" parameterType="UserDto">
+  		INSERT INTO USER_TB VALUES(#{user_id}, ' ', ' ', ' ', ' ', ' ', 'ficon.png', 0)
   	</insert>
   	
   	<select id="searchId" resultType="UserDto">

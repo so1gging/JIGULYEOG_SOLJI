@@ -8,7 +8,7 @@
 	<!-- write -->
 	<insert id="writeProject" parameterType="ProjectDto">
 		INSERT INTO PROJECT_TB
-		VALUES (PRO_SEQUENCE.NEXTVAL,#{user_id},#{pro_title},0,#{pro_goalmoney},#{pro_start_date},#{pro_due_date},SYSDATE,#{pro_detail},'F',#{pro_image})
+		VALUES (PRO_SEQUENCE.NEXTVAL,#{org_num},#{user_id},#{pro_title},0,#{pro_goalmoney},#{pro_start_date},#{pro_due_date},SYSDATE,#{pro_detail},'F',#{pro_image})
 	</insert>
 	
 	<!-- update -->

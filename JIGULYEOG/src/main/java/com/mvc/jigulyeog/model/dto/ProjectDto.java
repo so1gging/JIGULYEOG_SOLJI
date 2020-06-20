@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class ProjectDto {
 	private int pro_num; // 기본키
+	private int org_num; // 해당 환경단체 번호
 	private String user_id; // 작성자(환경단체)
 	private String pro_title; // 프로젝트 제목
 	private int pro_nowmoney; // 지금 기부액
@@ -14,15 +15,17 @@ public class ProjectDto {
 	private String pro_detail; //내용
 	private char pro_success; // 성공여부
 	private String pro_image; // 이미지 경로
+	
 	public ProjectDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ProjectDto(int pro_num, String user_id, String pro_title, int pro_nowmoney, int pro_goalmoney,
+	public ProjectDto(int pro_num, int org_num, String user_id, String pro_title, int pro_nowmoney, int pro_goalmoney,
 			Date pro_start_date, Date pro_due_date, Date pro_write_date, String pro_detail, char pro_success,
 			String pro_image) {
 		super();
 		this.pro_num = pro_num;
+		this.org_num = org_num;
 		this.user_id = user_id;
 		this.pro_title = pro_title;
 		this.pro_nowmoney = pro_nowmoney;
@@ -39,6 +42,12 @@ public class ProjectDto {
 	}
 	public void setPro_num(int pro_num) {
 		this.pro_num = pro_num;
+	}
+	public int getOrg_num() {
+		return org_num;
+	}
+	public void setOrg_num(int org_num) {
+		this.org_num = org_num;
 	}
 	public String getUser_id() {
 		return user_id;
@@ -102,15 +111,14 @@ public class ProjectDto {
 	}
 	@Override
 	public String toString() {
-		return "ProjectDto [pro_num=" + pro_num + ", user_id=" + user_id + ", pro_title=" + pro_title
-				+ ", pro_nowmoney=" + pro_nowmoney + ", pro_goalmoney=" + pro_goalmoney + ", pro_start_date="
-				+ pro_start_date + ", pro_due_date=" + pro_due_date + ", pro_write_date=" + pro_write_date
-				+ ", pro_detail=" + pro_detail + ", pro_success=" + pro_success + ", pro_image=" + pro_image + "]";
+		return "ProjectDto [pro_num=" + pro_num + ", org_num=" + org_num + ", user_id=" + user_id + ", pro_title="
+				+ pro_title + ", pro_nowmoney=" + pro_nowmoney + ", pro_goalmoney=" + pro_goalmoney
+				+ ", pro_start_date=" + pro_start_date + ", pro_due_date=" + pro_due_date + ", pro_write_date="
+				+ pro_write_date + ", pro_detail=" + pro_detail + ", pro_success=" + pro_success + ", pro_image="
+				+ pro_image + "]";
 	}
 	
 	
-	
-
 	
 	
 }

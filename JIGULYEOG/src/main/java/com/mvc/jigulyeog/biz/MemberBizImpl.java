@@ -108,6 +108,11 @@ public class MemberBizImpl implements MemberBiz {
 	}
 
 	@Override
+	public int regist_org(UserDto user) {
+		return dao.regist_org(user);
+	}
+
+	@Override
 	public UserDto searchId(UserDto user) {
 		return dao.searchId(user);
 	}
@@ -126,6 +131,17 @@ public class MemberBizImpl implements MemberBiz {
 	public int nickCheck(String user_nick) {
 		return dao.nickCheck(user_nick);
 	}
+
+	@Override
+	public int insertSNS(UserDto user) {
+		return dao.insertSNS(user);
+	}
+
+	@Override
+	public UserDto snslogin(String user_id) {
+		return dao.snslogin(user_id);
+	}
+
 
 
 	

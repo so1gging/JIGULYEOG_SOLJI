@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,6 +32,7 @@
       }
     </style>
     
+	
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script type="text/javascript">
 		function login(){
@@ -65,6 +67,7 @@
 			}
 		}
 	</script>
+	
   </head>
   <body>
     
@@ -109,11 +112,41 @@
             </div>
           </div>
 
-          <div class="sns">
-            <a href="#"><img src="${pageContext.request.contextPath}/resources/images/sns_kakao.png"></a>
-            <a href="#"><img src="${pageContext.request.contextPath}/resources/images/sns_naver.png"></a>
+          <div class="sns" >
+            <a href="https://kauth.kakao.com/oauth/authorize?client_id=132242b58385527b63dadb95d6f63f35&redirect_uri=http://localhost:8787/jigulyeog/kakaoLogin.do&response_type=code">
+            	<img src="${pageContext.request.contextPath}/resources/images/kakao_login_large_narrow.png" style="width: 230px; height: 50px;">
+            </a>
+            <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+            <div id="naver_id_login">
+            <a href="${url }"><img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"></a>
+            <!-- <a href="${url }"><img src="${pageContext.request.contextPath}/resources/images/sns_naver.png"></a> -->
+            </div>
+            <!--<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+            <script type="text/javascript">
+									var naverLogin = new naver.LoginWithNaverId(
+										{
+											clientId: "mAoH_4XKbJ8MMXqzYF59",
+											callbackUrl: "http://localhost:8787/jigulyeog/member/callback.jsp",
+											isPopup: false, 
+											loginButton: {color: "green", type: 3, height: 50} /* 로그인 버튼의 타입을 지정 */
+										}
+									);
+									
+									naverLogin.init();
+									
+								</script>
+            <script type="text/javascript">
+ 		var naver_id_login = new naver_id_login("mAoH_4XKbJ8MMXqzYF59", "http://localhost:8787/jigulyeog/callback.do");	// Client ID, CallBack URL 삽입
+											// 단 'localhost'가 포함된 CallBack URL
+ 		var state = naver_id_login.getUniqState();
+		
+ 		naver_id_login.setButton("green", 3, 50);
+ 		naver_id_login.setDomain("http://localhost:8787/jigulyeog/naverLogin.do");	//  URL
+ 		naver_id_login.setState(state);
+ 		naver_id_login.setPopup();
+ 		naver_id_login.init_naver_id_login();
+	</script>-->
           </div>
-        
         </div>
 
       </div>

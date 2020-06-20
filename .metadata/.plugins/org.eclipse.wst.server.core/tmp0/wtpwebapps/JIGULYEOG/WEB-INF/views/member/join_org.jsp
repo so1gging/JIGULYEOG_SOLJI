@@ -30,6 +30,137 @@
         font-family: 'Poppins','Jeju Gothic', serif;
       }
     </style>
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+	    function popup(){
+	        var url = "orgSearch.do";
+	        var name = "popup test";
+	        var option = "width = 600, height = 500, top = 100, left = 100, location = no"
+	        window.open(url, name, option);
+	    }
+    </script>
+    <script type="text/javascript">
+  		//모든 공백 체크 정규식
+  		var empJ = /\s/g;
+  		//아이디 정규식 
+  		var idJ = /^[a-z0-9][a-z0-9_\-]{3,19}$/;
+  		// 비밀번호 정규식
+  		var pwJ = /^[A-Za-z0-9]{4,12}$/;
+  		
+  		$(document).ready(function() {
+  			//아이디 중복확인
+  			$("#user_id").blur(function() {
+  				if($('#user_id').val()==''){
+  					$('#id_check').text('아이디를 입력하세요.');
+  					$('#id_check').css('color', 'red');
+  				} else if(idJ.test($('#user_id').val())!=true){
+  					$('#id_check').text('4~12자의 영문, 숫자만 사용 가능합니다.');
+  					$('#id_check').css('color', 'red');
+  				} else if($('#user_id').val()!=''){
+  					var user_id=$('#user_id').val();
+  					var param = {"user_id":user_id};
+  					
+  					$.ajax({
+  						type : 'POST',
+  						data : JSON.stringify(param),
+  						url : 'idCheck.do',
+  						dateType: 'json',
+  						contentType: "application/json; charset=UTF-8",
+  						success : function(data) {
+  							if(data.check==true){
+  								//사용할 수 있는 아이디~!!
+  								$('#id_check').text('사용가능한 아이디 입니다.');
+								$('#id_check').css('color', 'blue');
+								$("#usercheck").attr("disabled", false);
+  							}else{
+  								//중복아이디~
+  								$('#id_check').text('중복된 아이디 입니다.');
+  								$('#id_check').css('color', 'red');
+  								$("#usercheck").attr("disabled", true);
+  							}
+  						},error:function(){
+  							alert("AJAX 통신에러");
+  						}
+  					});//ajax///
+  				}//else if
+  			});//blur
+  			
+  			//비밀번호 입력
+  			$("#user_pw").blur(function() {
+  				if($('#user_pw').val()==''){
+  					$('#pw_check').text('비밀번호를 입력하세요.');
+  					$('#pw_check').css('color', 'red');
+  				} else if(pwJ.test($('#user_pw').val())!=true){
+  					$('#pw_check').text('4~12자의 영문, 숫자만 사용 가능합니다.');
+  					$('#pw_check').css('color', 'red');
+  				} else if($('#user_pw').val()!=''){
+  					$('#pw_check').css('display', 'none');
+  				}
+  			});
+  			
+  			//비밀번호 중복 확인
+  			$("#user_pw_chk").blur(function() {
+  				if($('#user_pw_chk').val()==''){
+  					$('#pw2_check').text('비밀번호를 입력하세요.');
+  					$('#pw2_check').css('color', 'red');
+  				} else if($('#user_pw_chk').val()!=$('#user_pw').val()){
+  					$('#pw2_check').text('비밀번호가 다릅니다.');
+  					$('#pw2_check').css('color', 'red');
+  				} else if($('#user_pw_chk').val()==$('#user_pw').val()){
+  					$('#pw2_check').css('display', 'none');
+  				}
+  			});
+  			
+  			
+  			//전화번호 입력
+  			$("#user_phone").blur(function() {
+  				if($('#user_phone').val()==''){
+  					$('#phone_check').text('전화번호를 입력하세요.');
+  					$('#phone_check').css('color', 'red');
+  				}  else if($('#user_phone').val()!=''){
+  					$('#phone_check').css('display', 'none');
+  				}
+  			});
+  			
+  			//submit시에 빈칸확인
+  			$("#submit").on("click", function(){
+				if($("#user_id").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#user_id").focus();
+					return false;
+				}
+				if($("#user_pw").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#user_pw").focus();
+					return false;
+				}
+				if($("#user_name").val()==""){
+					alert("성명을 입력해주세요.");
+					$("#user_name").focus();
+					return false;
+				}
+				if($("#user_nick").val()==""){
+					alert("닉네임을 입력해주세요.");
+					$("#user_nick").focus();
+					return false;
+				}
+				if($("#user_phone").val()==""){
+					alert("전화번호를 입력해주세요.");
+					$("#user_phone").focus();
+					return false;
+				}
+				if($("#user_addr").val()==""){
+					alert("주소를 입력해주세요.");
+					$("#user_addr").focus();
+					return false;
+				}
+			});
+  			
+  		});
+  		
+  		
+    </script>
   </head>
   <body>
     
@@ -56,22 +187,26 @@
     <div class="container" style="text-align: center;">
       <div class="row block-9">
         <div class="col-md-6 pr-md-5" style="margin: 0 auto;">
-          <form action="login.html" method="POST">
+          <form action="registOrg.do" method="POST" enctype="multipart/form-data" id="usercheck">
             <div class="form-group joinbox">
               <input type="text" class="form-control px-3 py-3 join_input" placeholder="ID" style="width: 500px;" name="user_id" id="user_id">
+              <div class="check_text" id="id_check"></div>
             </div>
             <div class="form-group joinbox">
               <input type="password" class="form-control px-3 py-3 join_input" placeholder="Password" style="width: 500px;" name="user_pw" id="user_pw">
+              <div class="check_text" id="pw_check"></div>
             </div>
             <div class="form-group joinbox">
               <input type="password" class="form-control px-3 py-3 join_input" placeholder="Password 확인" style="width: 500px;" name="user_pw_chk" id="user_pw_chk">
+              <div class="check_text" id="pw2_check"></div>
             </div>
             <div class="form-group joinbox">
               <input type="tel" class="form-control px-3 py-3 join_input" placeholder="Phone ('-'없이 번호만 입력해주세요)" style="width: 500px;" name="user_phone" id="user_phone">
+              <div class="check_text" id="phone_check"></div>
             </div>
             <div class="form-group joinbox clearFix">
               <label style="float: left; line-height: 49px; padding-left: 10px;">환경단체를 검색해주세요</label>
-              <input type="button" value="Search" class="btn py-3 px-5" style="width: 180px; float: right;" id="search_org">
+              <input type="button" value="Search" class="btn py-3 px-5" style="width: 180px; float: right;" id="search_org" onclick="popup();">
             </div>
             <div class="form-group joinbox">
               <input type="text" class="form-control px-3 py-3 join_input" readonly placeholder="Name" style="width: 500px;" name="user_name" id="user_name">
@@ -83,7 +218,7 @@
               <input type="text" class="form-control px-3 py-3 join_input" readonly placeholder="Address" style="width: 500px;" name="user_addr" id="user_addr">
             </div>
             <div class="form-group joinbox">
-              <input type="file" class="form-control px-3 py-3 join_input" style="width: 500px; border: none; padding-left: 0px !important;">
+              <input type="file" class="form-control px-3 py-3 join_input" style="width: 500px; border: none; padding-left: 0px !important;" name="file" id="file">
             </div>
             <div class="form-group">
               <input type="submit" value="Join" class="btn btn-success py-3 px-5 btn_success" style="width: 500px;">

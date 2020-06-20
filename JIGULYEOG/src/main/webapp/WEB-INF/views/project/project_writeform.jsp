@@ -138,6 +138,7 @@
     <div class="container">
     <form action="projectwrite.do" method="post" id="submitForm" enctype="multipart/form-data">
     	<input type="hidden" value="${user.user_id }" name="user_id">
+    	<input type="hidden" value="${user.user_status }" name="org_num">
 	      <table class="table">
 	        <div style="text-align: center; padding-bottom: 10px;">
 	          <h1>프로젝트 작성</h1>

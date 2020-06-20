@@ -1,8 +1,0 @@
-package com.mvc.jigulyeog.biz;
-
-import org.springframework.stereotype.Service;
-
-@Service
-public class FundingBizImpl implements FundingBiz{
-
-}
