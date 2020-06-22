@@ -39,7 +39,12 @@
     </style>
     
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      
       <script src="https://hidden-fjord-85200.herokuapp.com/socket.io/socket.io.js"></script>
+      
+      <!-- 
+      <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+      -->
       <script type="text/javascript">
       	$(function(){
       		 var commNo ='<c:out value="${commNo}"/>';
@@ -118,7 +123,15 @@
 
       	        $("#chat_body").scrollTop($("#chat_body")[0].scrollHeight);
       	    });
-      		
+      		 
+      		 socket.on("disconnectUser",function(data){
+      			var str = '<div class="msgbox_system">';
+     			 str += data.userNick;
+     			 str += '님이 퇴장하셨습니다.';
+     			 str += '</div>';
+     			$("#chat_body").append(str);
+      			 
+      		 });
       	});
       
       </script>
