@@ -24,10 +24,10 @@
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active"><a href="index.do" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="" class="nav-link">환경단체</a></li>
+          <li class="nav-item"><a href="org.do" class="nav-link">환경단체</a></li>
           <li class="nav-item"><a href="projectlist.do" class="nav-link">프로젝트</a></li>
           <li class="nav-item"><a href="" class="nav-link">청원</a></li>
-          <li class="nav-item"><a href="" class="nav-link">함께해요</a></li>
+          <li class="nav-item"><a href="together.do" class="nav-link">함께해요</a></li>
           <c:if test="${empty user }">
           	<li class="nav-item"><a href="loginForm.do" class="nav-link">로그인</a></li>          
           </c:if>

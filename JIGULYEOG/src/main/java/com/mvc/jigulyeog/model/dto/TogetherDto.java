@@ -7,6 +7,7 @@ public class TogetherDto {
 	private String tog_title;
 	private String tog_content;
 	private String tog_category;
+	private String tog_image;
 	private Date tog_dead;
 	private String tog_ps;
 	private String user_id;
@@ -15,13 +16,14 @@ public class TogetherDto {
 		super();
 	}
 
-	public TogetherDto(int tog_no, String tog_title, String tog_content, String tog_category, Date tog_dead,
-			String tog_ps, String user_id) {
+	public TogetherDto(int tog_no, String tog_title, String tog_content, String tog_category, String tog_image,
+			Date tog_dead, String tog_ps, String user_id) {
 		super();
 		this.tog_no = tog_no;
 		this.tog_title = tog_title;
 		this.tog_content = tog_content;
 		this.tog_category = tog_category;
+		this.tog_image = tog_image;
 		this.tog_dead = tog_dead;
 		this.tog_ps = tog_ps;
 		this.user_id = user_id;
@@ -50,8 +52,6 @@ public class TogetherDto {
 	public void setTog_content(String tog_content) {
 		this.tog_content = tog_content;
 	}
-	
-	
 
 	public String getTog_category() {
 		return tog_category;
@@ -84,5 +84,23 @@ public class TogetherDto {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+
+	public String getTog_image() {
+		return tog_image;
+	}
+
+	public void setTog_image(String tog_image) {
+		this.tog_image = tog_image;
+	}
+
+	@Override
+	public String toString() {
+		return "TogetherDto [tog_no=" + tog_no + ", tog_title=" + tog_title + ", tog_content=" + tog_content
+				+ ", tog_category=" + tog_category + ", tog_image=" + tog_image + ", tog_dead=" + tog_dead + ", tog_ps="
+				+ tog_ps + ", user_id=" + user_id + "]";
+	}
+	
+	
+	
 	
 }
