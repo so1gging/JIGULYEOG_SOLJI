@@ -32,6 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 			}
 		}
 
+		
 		return true;
 	}
 
@@ -40,6 +41,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		logger.info("[interceptor] : postHandle");
+		
 	}
 
 	//view까지 처리가 끝난 후 처리
