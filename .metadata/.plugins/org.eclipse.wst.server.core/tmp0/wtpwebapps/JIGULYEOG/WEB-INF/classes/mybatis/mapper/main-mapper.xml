@@ -10,12 +10,13 @@
 	</select>
 
 	<select id="popularProject" resultType="ProjectDto">
-	SELECT *
-	FROM PROJECT_TB
-	WHERE PRO_NUM IN ( SELECT PRO_NUM
-						FROM (SELECT MAX(PRO_NOWMONEY) , PRO_NUM
-								FROM PROJECT_TB
-								GROUP BY PRO_NUM) )
+		SELECT *
+		FROM(
+		        SELECT ROWNUM RN, PROJECT_TB.*
+		        FROM PROJECT_TB
+		        WHERE PRO_NOWMONEY IN (SELECT MAX(PRO_NOWMONEY) FROM PROJECT_TB)
+		        )
+		WHERE RN=1
 	</select>
 	
 	<select id="ongoingProject" resultType="ProjectDto">

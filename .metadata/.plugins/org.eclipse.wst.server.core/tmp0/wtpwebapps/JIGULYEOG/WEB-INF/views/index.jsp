@@ -84,10 +84,18 @@
 		          <span class="donation-time mb-3">
 		          	<fmt:formatDate value="${pProject.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${pProject.pro_due_date}" pattern="yyyy.MM.dd"/>까지
 		          	</span>
-		          <div class="progress custom-progress-success">
-			       		<fmt:parseNumber var="percent" integerOnly="true" value="${pProject.pro_nowmoney*100/pProject.pro_goalmoney }"/>
-			             <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-			      </div>
+		          	<c:if test="${pProject.pro_nowmoney !=0 }">
+				          <div class="progress custom-progress-success">
+					       		<fmt:parseNumber var="percent" integerOnly="true" value="${pProject.pro_nowmoney*100/pProject.pro_goalmoney }"/>
+					             <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					      </div>
+		          	</c:if>
+		          	<c:if test="${pProject.pro_nowmoney ==0 }">
+				          <div class="progress custom-progress-success">
+					             <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+					      </div>
+		          	</c:if>
+		          	
 		          <span class="fund-raised d-block mb-5">${pProject.pro_nowmoney} of ${pProject.pro_goalmoney }</span>
 		          <p><a href="projectdetail.do?pro_num=${pProject.pro_num }" class="btn btn-primary btn-hover-white py-3 px-5">기 부 하 기</a></p>
 		        </div>
@@ -120,10 +128,18 @@
 			              <div class="card-body">
 			                <h3 class="card-title"><a href="projectdetail.do?pro_num=${project.pro_num }">${project.pro_title }</a></h3>
 			                <span class="donation-time mb-3 d-block"><fmt:formatDate value="${project.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${project.pro_due_date}" pattern="yyyy.MM.dd"/>까지</span>
+			                <c:if test="${project.pro_nowmoney == 0 }">
 			                <div class="progress custom-progress-success">
+			                   <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			                </div>			                
+			                </c:if>
+			                <c:if test="${project.pro_nowmoney != 0 }">
+			                <div class="progress custom-progress-success">
+     
 			                   <fmt:parseNumber var="percent" integerOnly="true" value="${project.pro_nowmoney*100/project.pro_goalmoney }"/>
 			                   <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 			                </div>
+			                </c:if>
 			                <span class="fund-raised d-block">${project.pro_nowmoney} of ${project.pro_goalmoney }</span>
 			              </div>
 			            </div>
@@ -156,17 +172,18 @@
 					<c:forEach items="${cList }" var="chungwon">
 					
 			            <div class="card fundraise-item">
-			              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder"></a>
+			              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/chungwon/${chungwon.pet_photo}" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder"></a>
 			              <div class="card-body">
 			                <h3 class="card-title"><a href="#">${chungwon.pet_title }</a></h3>
 			               
-			                <span class="donation-time mb-3 d-block"><fmt:formatDate value="${chungwon.pet_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${chungwon.pet_dead}" pattern="yyyy.MM.dd"/>까지</span>
+			                  <div>작성자 : ${chungwon.user_id }</div>
+                              <div>청원 시작일 : ${chungwon.pet_date }</div>
 			                <!--
 			                <div class="progress custom-progress-success">
 			                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
 			                </div>
 			                -->
-			                <span class="fund-raised d-block">${chungwon.pet_person }명</span>
+			                 <span class="fund-raised d-block">청원 마감일 : ${chungwon.pet_dead }</span>
 			              </div>
 			            </div>
 

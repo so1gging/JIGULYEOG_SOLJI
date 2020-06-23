@@ -41,6 +41,10 @@
      <!-- 원중파트 -->
      <mapper resource="/mybatis/mapper/together-mapper.xml"></mapper>
      <mapper resource="/mybatis/mapper/togetherApply-mapper.xml"></mapper>
+     
+     <!-- 지민파트 -->
+     <mapper resource="/mybatis/mapper/chungwon-mapper.xml" />
+		<mapper resource="/mybatis/mapper/signup-mapper.xml" />
 
   </mappers>
   
