@@ -1,0 +1,43 @@
+package com.mvc.jigulyeog.model.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.mvc.jigulyeog.model.dto.ChungwonDto;
+import com.mvc.jigulyeog.model.dto.ProjectDto;
+import com.mvc.jigulyeog.model.dto.TogetherDto;
+
+public class MainDaoImpl implements MainDao{
+	Logger logger = LoggerFactory.getLogger(MainDaoImpl.class);
+	
+	@Autowired
+	SqlSessionTemplate sqlSession;
+	
+	@Override
+	public ProjectDto popularProject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProjectDto> ongoingProject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ChungwonDto> ongoingChungwon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TogetherDto> ongoingTogether() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

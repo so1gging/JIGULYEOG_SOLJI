@@ -29,6 +29,7 @@
      <mapper resource="/mybatis/mapper/fundingList-mapper.xml"/>
      <mapper resource="/mybatis/mapper/community-mapper.xml"/>
      <mapper resource="/mybatis/mapper/dm-mapper.xml"/>
+     <mapper resource="/mybatis/mapper/main-mapper.xml"/>
      
      <!-- 대형파트 -->
      <mapper resource="/mybatis/mapper/mypage-mapper.xml" />

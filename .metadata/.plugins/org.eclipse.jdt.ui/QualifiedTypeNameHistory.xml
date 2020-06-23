@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.lang.Object"/>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.FundingBizImpl"/>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.FundingDao"/>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.FundingDaoImpl"/>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.controller.FundingController"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.FundingBiz"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.controller.DMController"/>
 <fullyQualifiedTypeName name="org.springframework.http.HttpRequest"/>
@@ -18,29 +13,19 @@
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.controller.CommnunityController"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.CommunityBiz"/>
 <fullyQualifiedTypeName name="java.lang.Boolean"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.CommunityDao"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.CommunityDaoImpl"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.ProjectBiz"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.springframework.validation.BindingResult"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.CheerMessageDto"/>
-<fullyQualifiedTypeName name="org.mybatis.spring.SqlSessionTemplate"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.FundingListDto"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.Paging"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.PageMaker"/>
-<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.ProjectDto"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.CommunityNoticeDto"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.CommunityGuestbookDto"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Controller"/>
-<fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.controller.SMSController"/>
-<fullyQualifiedTypeName name="org.slf4j.Logger"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
 <fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.SendSMS"/>
@@ -60,4 +45,19 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.MainBiz"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.mybatis.spring.SqlSessionTemplate"/>
+<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.MainDaoImpl"/>
+<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dto.ProjectDto"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="com.mvc.jigulyeog.model.dao.MainDao"/>
+<fullyQualifiedTypeName name="org.slf4j.Logger"/>
+<fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
+<fullyQualifiedTypeName name="com.mvc.jigulyeog.biz.MainBizImpl"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>

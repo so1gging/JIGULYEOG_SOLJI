@@ -1,0 +1,17 @@
+package com.mvc.jigulyeog.model.dto;
+
+import java.util.Date;
+
+public class ChungwonDto {
+	
+	private int pet_no;
+	private String pet_title;
+	private String pet_content;
+	private String pet_link;
+	private Date pet_date;
+	private Date pet_dead;
+	private String user_id;
+	private int pet_person;
+	
+	
+}

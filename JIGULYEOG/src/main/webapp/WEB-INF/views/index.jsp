@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>        
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,8 +61,8 @@
   <div class="site-section">
     <div class="container">
       <div class="row searchbox">
-        <p>지금 지구력에는 <br> 20개의 환경단체와 함께하고 있습니다.</p>
-        <button>환경단체 검색</button>
+        <p>지금 지구력에는 <br> ${count}개의 환경단체와 함께하고 있습니다.</p>
+        <button onclick="location.href='org.do'">환경단체 검색</button>
       </div>
     </div>
   </div> <!-- 환경단체 검색 -->
@@ -72,23 +72,29 @@
   <div class="featured-donate overlay-color" style="background-image: url('${pageContext.request.contextPath}/resources/images/bg_2.jpg');">
     <div class="container">
       <h2 class="main_title">인기 프로젝트</h2>
-      <div class="row">
-        <div class="col-lg-8 order-lg-2 mb-3 mb-lg-0">
-          <img src="${pageContext.request.contextPath}/resources/images/bg_2.jpg" alt="Image placeholder" class="img-fluid">
-        </div>
-        <div class="col-lg-4 pr-lg-5">
-          <span class="featured-text mb-3 d-block">Featured</span>
-          <h2 class="project_title">프로젝트 이름이 들어가는 곳</h2>
-          <p class="mb-3">프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다.프로젝트 내용이 들어가는 곳입니다.</p>
-          <span class="donation-time mb-3">2020.03.17 ~ 2020.06.15까지</span>
-          <div class="progress custom-progress">
-            <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-          <span class="fund-raised d-block mb-5">1,562,400원 / 9,900,000원</span>
-          <p><a href="#" class="btn btn-primary btn-hover-white py-3 px-5">기 부 하 기</a></p>
-        </div>
-        
-      </div>
+      <c:choose>     
+      	<c:when test="${!empty pProject }">
+		      <div class="row">
+		        <div class="col-lg-8 order-lg-2 mb-3 mb-lg-0">
+		          <img src="${pageContext.request.contextPath}/resources/upload/images/project/${pProject.pro_image}" alt="Image placeholder" class="img-fluid">
+		        </div>
+		        <div class="col-lg-4 pr-lg-5">
+		          <span class="featured-text mb-3 d-block">Popular</span>
+		          <h2 class="project_title">${pProject.pro_title }</h2>
+		          <span class="donation-time mb-3">
+		          	<fmt:formatDate value="${pProject.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${pProject.pro_due_date}" pattern="yyyy.MM.dd"/>까지
+		          	</span>
+		          <div class="progress custom-progress-success">
+			       		<fmt:parseNumber var="percent" integerOnly="true" value="${pProject.pro_nowmoney*100/pProject.pro_goalmoney }"/>
+			             <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			      </div>
+		          <span class="fund-raised d-block mb-5">${pProject.pro_nowmoney} of ${pProject.pro_goalmoney }</span>
+		          <p><a href="projectdetail.do?pro_num=${pProject.pro_num }" class="btn btn-primary btn-hover-white py-3 px-5">기 부 하 기</a></p>
+		        </div>
+		        
+		      </div>
+      	</c:when>
+      </c:choose>
     </div>
 
   </div> <!-- 인기 프로젝트 -->
@@ -105,71 +111,27 @@
         
         <div class="col-md-12 block-11">
           <div class="nonloop-block-11 owl-carousel">
+			<c:choose>
+				<c:when test="${!empty pList }">
+					<c:forEach items="${pList }" var="project">
+					
+			            <div class="card fundraise-item">
+			              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/project/${project.pro_image}" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder"></a>
+			              <div class="card-body">
+			                <h3 class="card-title"><a href="projectdetail.do?pro_num=${project.pro_num }">${project.pro_title }</a></h3>
+			                <span class="donation-time mb-3 d-block"><fmt:formatDate value="${project.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${project.pro_due_date}" pattern="yyyy.MM.dd"/>까지</span>
+			                <div class="progress custom-progress-success">
+			                   <fmt:parseNumber var="percent" integerOnly="true" value="${project.pro_nowmoney*100/project.pro_goalmoney }"/>
+			                   <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			                </div>
+			                <span class="fund-raised d-block">${project.pro_nowmoney} of ${project.pro_goalmoney }</span>
+			              </div>
+			            </div>
+		            
+					</c:forEach>
+				</c:when>
+			</c:choose>
 
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_1.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">프로젝트 이름</a></h3>
-                <p class="card-text">프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">1,562,400원 / 9,900,000원</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_1.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">프로젝트 이름</a></h3>
-                <p class="card-text">프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">1,562,400원 / 9,900,000원</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_1.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">프로젝트 이름</a></h3>
-                <p class="card-text">프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">1,562,400원 / 9,900,000원</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_1.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">프로젝트 이름</a></h3>
-                <p class="card-text">프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">1,562,400원 / 9,900,000원</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_1.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">프로젝트 이름</a></h3>
-                <p class="card-text">프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다. 프로젝트 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">1,562,400원 / 9,900,000원</span>
-              </div>
-            </div>
            
           </div>
         </div>
@@ -189,71 +151,28 @@
         
         <div class="col-md-12 block-11">
           <div class="nonloop-block-11 owl-carousel">
+			<c:choose>
+				<c:when test="${!empty cList }">
+					<c:forEach items="${cList }" var="chungwon">
+					
+			            <div class="card fundraise-item">
+			              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder"></a>
+			              <div class="card-body">
+			                <h3 class="card-title"><a href="#">${chungwon.pet_title }</a></h3>
+			               
+			                <span class="donation-time mb-3 d-block"><fmt:formatDate value="${chungwon.pet_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${chungwon.pet_dead}" pattern="yyyy.MM.dd"/>까지</span>
+			                <!--
+			                <div class="progress custom-progress-success">
+			                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+			                </div>
+			                -->
+			                <span class="fund-raised d-block">${chungwon.pet_person }명</span>
+			              </div>
+			            </div>
 
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">청원 이름</a></h3>
-                <p class="card-text">청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">354명</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">청원 이름</a></h3>
-                <p class="card-text">청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">354명</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">청원 이름</a></h3>
-                <p class="card-text">청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">354명</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">청원 이름</a></h3>
-                <p class="card-text">청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">354명</span>
-              </div>
-            </div>
-
-            <div class="card fundraise-item">
-              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/images/img_2.jpg" alt="Image placeholder"></a>
-              <div class="card-body">
-                <h3 class="card-title"><a href="#">청원 이름</a></h3>
-                <p class="card-text">청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다. 청원 내용이 들어가는 곳입니다.</p>
-                <span class="donation-time mb-3 d-block">2020.03.17 ~ 2020.06.15까지</span>
-                <div class="progress custom-progress-success">
-                  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <span class="fund-raised d-block">354명</span>
-              </div>
-            </div>
+					</c:forEach>
+				</c:when>
+			</c:choose>
            
           </div>
         </div>
@@ -262,6 +181,7 @@
   </div> <!-- 진행중인 청원 -->
 
 
+<!-- 
   <div class="site-section fund-raisers">
     <div class="container">
       <div class="row mb-5">
@@ -333,8 +253,10 @@
         
       </div>
     </div>
-  </div> <!-- 최대 후원자 -->
-
+  </div> 
+  -->
+  <!-- 최대 후원자 -->
+  
   <div class="site-section bg-light">
     <div class="container">
       <div class="row mb-5">
@@ -344,42 +266,28 @@
       </div>
 
       <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="#" class="mb-3 img-wrap">
-              <img src="${pageContext.request.contextPath}/resources/images/img_4.jpg" alt="Image placeholder" class="img-fluid">
-              <span class="date">2020. 06. 15</span>
-            </a>
-            <h3><a href="#">봉사활동 이름</a></h3>
-            <p>봉사활동 내용이 들어가는 곳입니다. 봉사활동 내용이 들어가는 곳입니다. 봉사활동 내용이 들어가는 곳입니다.</p>
-            <p><a href="#">자세히 보기</a></p>
-          </div>
-        </div>
-        
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="#" class="mb-3 img-wrap">
-              <img src="${pageContext.request.contextPath}/resources/images/img_4.jpg" alt="Image placeholder" class="img-fluid">
-              <span class="date">2020. 06. 15</span>
-            </a>
-            <h3><a href="#">봉사활동 이름</a></h3>
-            <p>봉사활동 내용이 들어가는 곳입니다. 봉사활동 내용이 들어가는 곳입니다. 봉사활동 내용이 들어가는 곳입니다.</p>
-            <p><a href="#">자세히 보기</a></p>
-          </div>
-        </div>
+      <c:choose>
+      
+      
+      	<c:when test="${!empty tList }">
+      		<c:forEach items="${tList }" var="together">
+		        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
+		          <div class="post-entry">
+		            <a href="#" class="mb-3 img-wrap">
+		              <img src="${pageContext.request.contextPath}/resources/upload/images/together/${together.tog_image}" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder" class="img-fluid">
+		              <span class="date">${together.tog_category }</span>
+		            </a>
+		            <h3><a href="together_detail.do?tog_no=${together.tog_no }">${together.tog_title }</a></h3>
+		            <p><a href="together_detail.do?tog_no=${together.tog_no }">자세히 보기</a></p>
+		          </div>
+		        </div>	
+		        
+      		</c:forEach>
+      	
+      	</c:when>
+      </c:choose>
 
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
-          <div class="post-entry">
-            <a href="#" class="mb-3 img-wrap">
-              <img src="${pageContext.request.contextPath}/resources/images/img_4.jpg" alt="Image placeholder" class="img-fluid">
-              <span class="date">2020. 06. 15</span>
-            </a>
-            <h3><a href="#">봉사활동 이름</a></h3>
-            <p>봉사활동 내용이 들어가는 곳입니다. 봉사활동 내용이 들어가는 곳입니다. 봉사활동 내용이 들어가는 곳입니다.</p>
-            <p><a href="#">자세히 보기</a></p>
-          </div>
-        </div>
-        
+
       </div>
     </div>
   </div> <!-- 함께해요 -->
