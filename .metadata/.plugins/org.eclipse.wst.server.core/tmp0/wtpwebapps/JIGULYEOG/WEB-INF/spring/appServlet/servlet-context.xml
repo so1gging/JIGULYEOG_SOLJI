@@ -28,4 +28,13 @@
 	<!-- transaction -->
 	<tx:annotation-driven/>
 	
+		<!-- interceptor -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/*"/><!-- 인터셉터를 적용할 url -->
+				<beans:bean class="com.mvc.jigulyeog.common.interceptor.LoginInterceptor"/>
+			
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>

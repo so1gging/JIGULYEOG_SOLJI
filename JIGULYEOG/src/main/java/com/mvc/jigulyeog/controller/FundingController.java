@@ -1,7 +1,12 @@
 package com.mvc.jigulyeog.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,5 +92,16 @@ public class FundingController {
 		model.addAttribute("pro_num",pro_num);
 		
 		return "/project/paypage_result";
+	}
+	
+	private void jsResponse(String msg,String url,HttpServletResponse response) throws IOException {
+		
+		String s = "<script type='text/javascript' charset='utf-8'>"+
+					"alert('"+msg+"');"+
+					"location.href='"+url+"';"+
+					"</script>";
+		PrintWriter out = response.getWriter();
+		out.print(s);
+		
 	}
 }
