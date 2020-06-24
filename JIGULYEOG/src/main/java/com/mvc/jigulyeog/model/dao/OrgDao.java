@@ -1,9 +1,11 @@
 package com.mvc.jigulyeog.model.dao;
 
+import java.util.Date;
 import java.util.List;
 
 
 import com.mvc.jigulyeog.model.dto.OrgDto;
+import com.mvc.jigulyeog.model.dto.ProjectDto;
 
 public interface OrgDao {
 	String NAMESPACE = "mapper.org.";
@@ -15,5 +17,13 @@ public interface OrgDao {
 	int totalOrgSearch(String keyword);
 
 	List<OrgDto> getOrgListSearch(int startRow, int endRow, String keyword);
+
+	OrgDto selectOne(Integer org_num);
+
+	List<ProjectDto> getPList(Integer org_num);
+
+	List<ProjectDto> getNowPList(int org_num);
+
+	List<ProjectDto> getEndPList(int org_num);
 
 }

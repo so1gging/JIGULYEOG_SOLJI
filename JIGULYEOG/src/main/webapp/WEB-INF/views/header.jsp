@@ -33,15 +33,16 @@
           </c:if>
           <c:if test="${!empty user }">
           	<li class="nav-item"><a href="logout.do" class="nav-link">로그아웃</a></li>
-	          <li class="nav-item dropdown"><a href="" class="nav-link" data-toggle="dropdown">마이페이지</a>
-	          	<div class="dropdown-menu">
-	          		<a class="dropdown-item" href="myPage.do">유저 마이페이지</a>
-	          		<a class="dropdown-item" href="myDonate.do">유저 후원페이지</a>
-	          		<a class="dropdown-item" href="myAction.do">유저 내활동페이지</a>
-	          		<a class="dropdown-item" href="dmlist.do">DM 목록</a>	          		
-	          		<a class="dropdown-item" href="secession.do">탈퇴페이지</a>
-	          	</div>
-	          <li>    
+				<li class="nav-item dropdown"><a href="" class="nav-link" data-toggle="dropdown">마이페이지</a>
+		          	<div class="dropdown-menu">
+		          		<a class="dropdown-item" href="myPage.do">유저 마이페이지</a>
+		          		<a class="dropdown-item" href="myDonate.do">유저 후원페이지</a>
+		          		<a class="dropdown-item" href="myAction.do">유저 내활동페이지</a>
+		          		<a class="dropdown-item" href="org_myPage.do">단체 마이페이지</a>
+		          		<a class="dropdown-item" href="org_myAction.do">단체 활동페이지</a>
+		          		<a class="dropdown-item" href="secession.do">탈퇴페이지</a>
+		          	</div>
+          		<li>    
           </c:if>
         </ul>
       </div>

@@ -86,7 +86,7 @@
             </table>
           </div>
           <div>
-            <input type=button value="수정" class="btn btn-success py-2 px-5 m-3" onclick="location.href='user_updateform.do'">
+            <input type=button value="수정" class="btn btn-success py-2 px-5 m-3" onclick="location.href='user_pw_chkform.do'">
           </div>
         </div>
       </div>

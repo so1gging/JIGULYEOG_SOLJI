@@ -35,7 +35,7 @@
   		//모든 공백 체크 정규식
   		var empJ = /\s/g;
   		//아이디 정규식 
-		var idJ = /^[A-Za-z0-9][A-Za-z0-9_\-]{3,19}$/;
+  		var idJ = /^[A-Za-z0-9][A-Za-z0-9_\-]{3,19}$/;
   		// 비밀번호 정규식
   		var pwJ = /^[A-Za-z0-9]{4,12}$/;
   		
@@ -69,6 +69,7 @@
   								$('#id_check').text('중복된 아이디 입니다.');
   								$('#id_check').css('color', 'red');
   								$("#usercheck").attr("disabled", true);
+  								$("#user_id").focus();
   							}
   						},error:function(){
   							alert("AJAX 통신에러");
@@ -139,6 +140,7 @@
   								$('#nick_check').text('중복된 닉네임 입니다.');
   								$('#nick_check').css('color', 'red');
   								$("#usercheck").attr("disabled", true);
+  								$("#user_nick").focus();
   							}
   						},error:function(){
   							alert("AJAX 통신에러");

@@ -6,7 +6,7 @@
 	<!-- 댓글 insert -->
 	<insert id="signInsert" parameterType="SignUpDto">
 		INSERT INTO SIGN_UP
-		VALUES(SIG_SEQUENCE.NEXTVAL,#{pet_no},'dkswlalj',#{sig_content},SYSDATE)
+		VALUES(SIG_SEQUENCE.NEXTVAL,#{pet_no},#{user_id},#{sig_content},SYSDATE)
 	</insert>
 	
 	<!-- 댓글 list -->

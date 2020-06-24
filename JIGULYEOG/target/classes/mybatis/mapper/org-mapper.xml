@@ -36,4 +36,29 @@
 		WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
+	<select id="orgSelectOne" resultType="OrgDto" parameterType="Integer">
+		SELECT *
+		FROM ORG
+		WHERE ORG_NUM=#{org_num}
+	</select>
+	
+	<select id="getPList" resultType="ProjectDto" parameterType="Integer">
+		SELECT *
+		FROM PROJECT_TB
+		WHERE ORG_NUM=#{org_num}
+	</select>
+	
+	<select id="getNowPList" resultType="ProjectDto" parameterType="int">
+		SELECT *
+		FROM PROJECT_TB
+		WHERE ORG_NUM=#{org_num} AND PRO_DUE_DATE <![CDATA[>]]> SYSDATE
+	</select>
+	
+	<select id="getEndPList" resultType="ProjectDto" parameterType="int">
+		SELECT *
+		FROM PROJECT_TB
+		WHERE ORG_NUM=#{org_num} AND PRO_DUE_DATE <![CDATA[<]]> SYSDATE
+	</select>
+	
+	
 </mapper>

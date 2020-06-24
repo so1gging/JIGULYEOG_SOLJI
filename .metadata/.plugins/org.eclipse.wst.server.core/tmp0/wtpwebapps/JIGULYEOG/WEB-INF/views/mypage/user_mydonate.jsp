@@ -91,12 +91,25 @@ body {
 							<div class="nonloop-block-11 owl-carousel">
 								<c:choose>
 									<c:when test="${empty projectList}">
-										---------- 후원한 프로젝트가 존재하지 않습니다. ----------
+										<div class="card fundraise-item">
+											<div class="card-body">
+												<h3 class="card-title">
+													<a href="#">후원한 프로젝트가 없습니다.<br>프로젝트에 후원해볼까요?</a>
+												</h3>
+											</div>
+										</div>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="projectList" items="${projectList}">
-											<fmt:parseNumber var="percent" integerOnly="true"
-												value="${projectList.pro_nowmoney*100/projectList.pro_goalmoney }"></fmt:parseNumber>
+											<c:choose>
+												<c:when test="${projectList.pro_nowmoney ==0 }">
+													<c:set var="percent" value="0"></c:set>
+												</c:when>
+												<c:otherwise>
+													<fmt:parseNumber var="percent" integerOnly="true"
+														value="${projectList.pro_nowmoney*100/projectList.pro_goalmoney }"></fmt:parseNumber>
+												</c:otherwise>
+											</c:choose>
 											<div class="card fundraise-item">
 												<a href="#"><img class="card-img-top"
 													src="${pageContext.request.contextPath}/resources/upload/images/project/${projectList.pro_image}"
@@ -134,8 +147,14 @@ body {
 						<div class="col-md-12 block-11">
 							<div class="nonloop-block-11 owl-carousel">
 								<c:choose>
-									<c:when test="${empty orgList }">
-										---------- 구독한 단체가 없습니다. ----------
+									<c:when test="${empty orgList}">
+										<div class="card fundraise-item">
+											<div class="card-body">
+												<h3 class="card-title">
+													<a href="#">구독한 단체가 없습니다.<br>단체를 구독해볼까요?</a>
+												</h3>
+											</div>
+										</div>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="orgList" items="${orgList }">

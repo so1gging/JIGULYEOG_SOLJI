@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mvc.jigulyeog.biz.SignUpBiz;
 import com.mvc.jigulyeog.model.dto.SignUpDto;
+import com.mvc.jigulyeog.model.dto.UserDto;
 
 @Controller
 public class SignUpController {
@@ -33,14 +34,14 @@ public class SignUpController {
 	//댓글 insert ajax
 	@RequestMapping(value="/signupadd.do",method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Integer> signUpAdd(@RequestBody SignUpDto sig_content){
+	public Map<String,Integer> signUpAdd(@RequestBody SignUpDto sig_content,HttpServletRequest request){
 /////////////////////////////(시작)login/회원가입 합칠 때 만든 코드 /새로 하려면지워두 됨
 		
 		//로그인 시 댓글 작성 가능// 비 로그인시 ajax에서 alert 띄운 후 loginForm.do로
 		
-//		String user_id = ((UserDto)request.getSession().getAttribute("user")).getUser_id();
-//		System.out.println("user_id : " + user_id);
-//		sig_content.setUser_id(user_id);
+		String user_id = ((UserDto)request.getSession().getAttribute("user")).getUser_id();
+		System.out.println("user_id : " + user_id);
+		sig_content.setUser_id(user_id);
 		
 /////////////////////////////(끝)login/회원가입 합칠 때 만든 코드 /새로 하려면지워두 됨 
 		int res = biz.insert(sig_content);

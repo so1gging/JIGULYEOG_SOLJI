@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,8 +101,8 @@ body {
 					<form action="org.do" method="get" id="searchForm">
 						<div class="form-group input-group">
 							<input type="text" id="searchKeyword" name="keyword"
-								class="form-control px-3 py-2" placeholder="단체명 또는 주소를 입력하세요."> <input
-								type="button" class="btn btn-success py-2 px-5 ml-2"
+								class="form-control px-3 py-2" placeholder="단체명 또는 주소를 입력하세요.">
+							<input type="button" class="btn btn-success py-2 px-5 ml-2"
 								id="searchBtn" value="검색">
 						</div>
 					</form>
@@ -116,17 +117,60 @@ body {
 
 					<!-- img태그위치에 지도api 적용해야함 -->
 					<div id="map" style="width: 500px; height: 400px;"></div>
-					<script type="text/javascript"
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0770d1c109b361eee880a8893aba7aa0"></script>
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0770d1c109b361eee880a8893aba7aa0&libraries=services"></script>
 					<script type="text/javascript">
-						var container = document.getElementById('map');
-						var options = {
-							center : new kakao.maps.LatLng(33.450701,
-									126.570667),
-							level : 3
-						};
+						$(function(){
+							var orgList=new Array();
+							<c:forEach items="${orgList}" var="org">
+								var json = new Object();
+								json.org_name = "${org.org_name}";
+								json.org_addr = "${org.org_addr}"
+								orgList.push(json);
+							</c:forEach>
+							//alert("json="+JSON.stringify(result))
+							
+							//카카오맵 코드
+							var mapContainer = document.getElementById('map'); // 지도를 표시할 div 
+							var mapOption = {
+								center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+								level : 3	// 지도의 확대 레벨
+							};
 
-						var map = new kakao.maps.Map(container, options);
+							// 지도를 생성합니다    
+							var map = new kakao.maps.Map(mapContainer, mapOption);
+
+							// 주소-좌표 변환 객체를 생성합니다
+							var geocoder = new kakao.maps.services.Geocoder();
+							
+							var bounds = new kakao.maps.LatLngBounds();
+							
+							// 주소로 좌표를 검색합니다.
+							for(var i =0; i<orgList.length; i++){
+								geocoder.addressSearch(orgList[i].org_addr, function(result, status){
+									//정상적으로 검색이 완료됐으면
+									if(status === kakao.maps.services.Status.OK){
+										var coords = new kakao.maps.LatLng(
+											result[0].y,
+											result[0].x
+										);
+										
+										// 결과값으로 받은 위치를 마커로 표시합니다
+										var marker = new kakao.maps.Marker({
+													map : map,
+													position : coords
+												});
+										
+										// LatLngBounds 객체에 좌표를 추가합니다
+										bounds.extend(coords);
+										// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+										//map.setCenter(coords);
+										// LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+						  				// 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+										map.setBounds(bounds);
+									}
+								})
+							}
+						});
 					</script>
 
 					<br> <br>
@@ -155,7 +199,7 @@ body {
 												<td>${org.org_ceo }</td>
 												<td><input type="button" value="상세"
 													class="btn btn-success"
-													onclick="location.href='org_detail.html'"></td>
+													onclick="location.href='orgDetail.do?org_num=${org.org_num}'"></td>
 											</tr>
 										</c:forEach>
 									</c:otherwise>
@@ -239,9 +283,6 @@ body {
 	<script src="${pageContext.request.contextPath}/resources/js/aos.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/jquery.animateNumber.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 
 </body>

@@ -78,6 +78,7 @@ body {
 		</div>
 	</div>
 	<!----------------- END header ----------------->
+
 	<!-- START section -->
 	<div class="site-section">
 		<div class="container">
@@ -89,7 +90,13 @@ body {
 							<div class="nonloop-block-11 owl-carousel">
 								<c:choose>
 									<c:when test="${empty signUpList}">
-										---------- 서명한 청원이 존재하지 않습니다. ----------
+										<div class="card fundraise-item">
+											<div class="card-body">
+												<h3 class="card-title">
+													<a href="#">청원 내용이 없습니다.<br>청원에 참가해볼까요?</a>
+												</h3>
+											</div>
+										</div>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="signUpList" items="${signUpList}">
@@ -111,57 +118,87 @@ body {
 							</div>
 						</div>
 					</div>
-					<br> <br>
+					<br> <br> <br>
 				</div>
 			</div>
 
 			<div class="row">
-				<h1>내가 올린 청원</h1>
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:choose>
-							<c:when test="${empty chungwonList }">
-								---------- 작성한 청원이 존재하지 않습니다. ----------
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="chungwonList" items="${chungwonList }">
+				<div class="col-md-12">
+					<h1>내가 올린 청원</h1>
+					<div class="row">
+						<div class="col-md-12 block-11">
+							<table class="table table-hover" style="text-align: center;">
+								<thead>
 									<tr>
-										<td>${chungwonList.pet_no }</td>
-										<td><a style="color: black;" href="#">${chungwonList.pet_title }</a></td>
-										<td><input type="button" value="서명자 엑셀로 추출"
-											class="btn btn-primary" onclick="location.href='#'"></td>
+										<th style="width: 20%">번호</th>
+										<th style="width: 60%">제목</th>
+										<th style="width: 20%">엑셀 추출</th>
 									</tr>
+								</thead>
+								<tbody>
+									<c:choose>
+										<c:when test="${empty CWList }">
+											<tr>
+												<td colspan="3" style="text-align: center;">----------
+													작성한 청원이 존재하지 않습니다. ----------</td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="CW" items="${CWList }">
+												<tr>
+													<td>${CW.pet_no }</td>
+													<td style="text-align: left;"><a style="color: black;"
+														href="#">${CW.pet_title }</a></td>
+													<td>
+														<form method="post" action="SUExcelDown.do">
+															<input type="hidden" name="pet_no" value="${CW.pet_no }">
+															<input type="hidden" name="pet_title"
+																value="${CW.pet_title }"> <input type="submit"
+																value="서명자 엑셀로 추출" class="btn btn-primary">
+														</form>
+													</td>
+												</tr>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- CW PAGE MAKER PART -->
+					<div style="width: 200px; margin: 0px auto;">
+						<nav aria-label="Page navigation">
+							<ul class="pagination">
+								<c:if test="${CWPageMaker.prev }">
+									<li class="page-item"><a class="page-link"
+										href="myAction.do?CWPage=${CWPageMaker.startPage - 1 }"
+										aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+									</a></li>
+								</c:if>
+								<c:forEach begin="${CWPageMaker.startPage }"
+									end="${CWPageMaker.endPage }" var="idx">
+									<c:choose>
+										<c:when test="${idx eq CWPage }">
+											<li class="page-item active"><a class="page-link"
+												href="myAction.do?CWPage=${idx }">${idx }</a></li>
+										</c:when>
+										<c:otherwise>
+											<li class="page-item"><a class="page-link"
+												href="myAction.do?CWPage=${idx }">${idx }</a></li>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
-							</c:otherwise>
-						</c:choose>
-					</tbody>
-				</table>
-			</div>
-
-			<!--페이징-->
-			<div style="width: 200px; margin: 0px auto;">
-				<nav aria-label="Page navigation">
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
-					</ul>
-				</nav>
+								<c:if test="${CWPageMaker.next && CWPageMaker.endPage>0 }">
+									<li class="page-item"><a class="page-link"
+										href="myAction.do?CWPage=${CWPageMaker.endPage + 1 }"
+										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>
+					</div>
+					<br> <br>
+				</div>
 			</div>
 
 			<div class="row">
@@ -172,7 +209,13 @@ body {
 							<div class="nonloop-block-11 owl-carousel">
 								<c:choose>
 									<c:when test="${empty togetherApplyList }">
-										---------- 신청한 함께하기가 존재하지 않습니다. ----------
+										<div class="card fundraise-item">
+											<div class="card-body">
+												<h3 class="card-title">
+													<a href="#">함께하기 내용이 없습니다.<br>함께하기에 참가해볼까요?</a>
+												</h3>
+											</div>
+										</div>
 									</c:when>
 									<c:otherwise>
 										<c:forEach var="togetherApplyList"
@@ -182,10 +225,15 @@ body {
 													<h3 class="card-title">
 														<a href="#">${togetherApplyList.tog_title }</a>
 													</h3>
-													<p class="card-text">카테고리 : ${togetherApplyList.tog_category }</p>
-													<p class="card-text">내용 : ${togetherApplyList.tog_content }</p>
-													<p class="card-text">종료일 : <fmt:formatDate
-															value="${togetherApplyList.tog_dead }" pattern="yyyy.MM.dd" /></p>
+													<p class="card-text">카테고리 :
+														${togetherApplyList.tog_category }</p>
+													<p class="card-text">내용 :
+														${togetherApplyList.tog_content }</p>
+													<p class="card-text">
+														종료일 :
+														<fmt:formatDate value="${togetherApplyList.tog_dead }"
+															pattern="yyyy.MM.dd" />
+													</p>
 												</div>
 											</div>
 										</c:forEach>
@@ -196,30 +244,39 @@ body {
 					</div>
 				</div>
 			</div>
-			<br> <br> <br>
+			<br> <br>
 
 			<div class="row">
 				<h1>내가 올린 함께해요</h1>
-				<table class="table table-hover">
+				<table class="table table-hover" style="text-align: center;">
 					<thead>
 						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th></th>
+							<th style="width: 20%;">번호</th>
+							<th style="width: 60%">제목</th>
+							<th style="width: 20%">엑셀추출</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:choose>
-							<c:when test="${empty togetherList }">
-								---------- 작성한 청원이 존재하지 않습니다. ----------
+							<c:when test="${empty TGList }">
+								<tr>
+									<td colspan="3">---------- 작성한 청원이 존재하지 않습니다. ----------</td>
+								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="togetherList" items="${togetherList }">
+								<c:forEach var="TG" items="${TGList }">
 									<tr>
-										<td>${togetherList.tog_no }</td>
-										<td><a style="color: black;" href="#">${togetherList.tog_title }</a></td>
-										<td><input type="button" value="서명자 엑셀로 추출"
-											class="btn btn-primary" onclick="location.href='#'"></td>
+										<td>${TG.tog_no }</td>
+										<td style="text-align: left;"><a style="color: black;"
+											href="#">${TG.tog_title }</a></td>
+										<td>
+											<form method="post" action="TGAExcelDown.do">
+												<input type="hidden" name="tog_no" value="${TG.tog_no }">
+												<input type="hidden" name="tog_title"
+													value="${TG.tog_title }"> <input type="submit"
+													value="신청자 엑셀로 추출" class="btn btn-primary">
+											</form>
+										</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -227,27 +284,38 @@ body {
 					</tbody>
 				</table>
 			</div>
-
-			<!--페이징-->
+			<!-- TG PAGE MAKER PART -->
 			<div style="width: 200px; margin: 0px auto;">
 				<nav aria-label="Page navigation">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+						<c:if test="${TGPageMaker.prev }">
+							<li class="page-item"><a class="page-link"
+								href="myAction.do?TGPage=${TGPageMaker.startPage - 1 }"
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+						</c:if>
+						<c:forEach begin="${TGPageMaker.startPage }"
+							end="${TGPageMaker.endPage }" var="idx">
+							<c:choose>
+								<c:when test="${idx eq TGPage }">
+									<li class="page-item active"><a class="page-link"
+										href="myAction.do?TGPage=${idx }">${idx }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link"
+										href="myAction.do?TGPage=${idx }">${idx }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						<c:if test="${TGPageMaker.next && TGPageMaker.endPage>0 }">
+							<li class="page-item"><a class="page-link"
+								href="myAction.do?TGPage=${TGPageMaker.endPage + 1 }"
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</c:if>
 					</ul>
 				</nav>
-
 			</div>
-
 		</div>
 	</div>
 
@@ -297,6 +365,5 @@ body {
 	<script
 		src="${pageContext.request.contextPath}/resources/js/google-map.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
 </body>
 </html>

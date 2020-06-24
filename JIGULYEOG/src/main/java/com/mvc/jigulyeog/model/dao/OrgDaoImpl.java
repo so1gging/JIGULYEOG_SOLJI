@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.mvc.jigulyeog.model.dto.OrgDto;
+import com.mvc.jigulyeog.model.dto.ProjectDto;
 
 @Repository
 public class OrgDaoImpl implements OrgDao{
@@ -79,6 +80,51 @@ public class OrgDaoImpl implements OrgDao{
 		}
 		
 		return orgList;
+	}
+
+	@Override
+	public OrgDto selectOne(Integer org_num) {
+		OrgDto org = null;
+		try {
+			org = sqlSession.selectOne(NAMESPACE+"orgSelectOne",org_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return org;
+	}
+
+	@Override
+	public List<ProjectDto> getPList(Integer org_num) {
+		List<ProjectDto> pList = new ArrayList<ProjectDto>();
+		try {
+			pList = sqlSession.selectList(NAMESPACE+"getPList",org_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pList;
+	}
+
+	@Override
+	public List<ProjectDto> getNowPList(int org_num) {
+		List<ProjectDto> nowPList = new ArrayList<ProjectDto>();
+		try {
+			nowPList = sqlSession.selectList(NAMESPACE+"getNowPList",org_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return nowPList;
+	}
+
+	@Override
+	public List<ProjectDto> getEndPList(int org_num) {
+		List<ProjectDto> endPList = new ArrayList<ProjectDto>();
+		try {
+			endPList = sqlSession.selectList(NAMESPACE+"getEndPList",org_num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return endPList;
 	}
 
 }
