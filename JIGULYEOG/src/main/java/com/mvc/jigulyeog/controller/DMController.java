@@ -48,7 +48,7 @@ public class DMController {
 		logger.info("[ unreadDMList : "+unreadDMList.toString()+" ]");
 		
 		// 안읽은 메세지가 존재
-		if(DMList.size() != unreadDMList.size()) {
+		if(!unreadDMList.isEmpty()) {
 			for(DMListDto dto1:unreadDMList) {
 				if(!DMList.contains(dto1)) {
 					// 가지고 있지 않으면,

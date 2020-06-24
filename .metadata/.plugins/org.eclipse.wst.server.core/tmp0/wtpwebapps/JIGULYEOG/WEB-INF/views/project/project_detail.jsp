@@ -85,7 +85,7 @@
 				success:function(msg){
 					if(msg.check==true){
 						alert("응원메세지가 수정되었습니다.");
-						pagingCheerMsg(1);
+						pagingCheerMsg(1);s
 						
 					}else{
 						alert("응원메세지 수정 실패.");
