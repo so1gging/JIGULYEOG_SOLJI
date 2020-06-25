@@ -133,6 +133,11 @@ public class MemberBizImpl implements MemberBiz {
 	}
 
 	@Override
+	public int phoneCheck(String user_phone) {
+		return dao.phoneCheck(user_phone);
+	}
+	
+	@Override
 	public int insertSNS(UserDto user) {
 		return dao.insertSNS(user);
 	}
@@ -141,6 +146,7 @@ public class MemberBizImpl implements MemberBiz {
 	public UserDto snslogin(String user_id) {
 		return dao.snslogin(user_id);
 	}
+
 
 
 

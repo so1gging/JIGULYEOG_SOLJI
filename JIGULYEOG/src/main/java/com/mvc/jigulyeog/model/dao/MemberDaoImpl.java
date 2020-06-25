@@ -119,6 +119,19 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return res;
 	}
+	
+	@Override
+	public int phoneCheck(String user_phone) {
+		logger.info("[MemberDao : PHONECHECK ]");
+		int res = 0;
+		try {
+			res = sqlSession.selectOne(NAMESPACE+"phoneCheck",user_phone);
+		} catch (Exception e) {
+			System.out.println("[error] : phoneCheck");
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 	@Override
 	public UserDto snslogin(String user_id) {
