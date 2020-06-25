@@ -109,7 +109,10 @@ public class MemberBizImpl implements MemberBiz {
 
 	@Override
 	public int regist_org(UserDto user) {
-		return dao.regist_org(user);
+		/*솔지 추가 부분 */
+		dao.regist_org(user);
+		
+		return dao.updateOrgImg(user);
 	}
 
 	@Override

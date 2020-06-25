@@ -1,5 +1,8 @@
 package com.mvc.jigulyeog.model.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,6 +143,23 @@ public class MemberDaoImpl implements MemberDao {
 			res = sqlSession.selectOne(NAMESPACE+"snslogin",user_id);
 		} catch (Exception e) {
 			System.out.println("[error] : login");
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	/*************솔지 추가 부분**************/
+	@Override
+	public int updateOrgImg(UserDto user) {
+		int res = 0;
+		Map<String,Object> param = new HashMap<String,Object>();
+		param.put("user_status", user.getUser_status());
+		param.put("user_pic", user.getUser_pic());
+		
+		try {
+			res = sqlSession.update(NAMESPACE+"regist_org_img_update",param);
+		} catch (Exception e) {
+			System.out.println("[error] : regist_org_img_update");
 			e.printStackTrace();
 		}
 		return res;
