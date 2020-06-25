@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import = "com.mvc.jigulyeog.model.dto.UserDto" %>
 
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,9 @@
     </style>
   </head>
 <body>
+<%
+	UserDto user = (UserDto)session.getAttribute("user");
+%>
     <div class="font">
   <!----------------- START nav ----------------->  
    <%@ include file="../header.jsp" %>
@@ -104,7 +108,8 @@
 
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
                         <div class="card fundraise-item mb-5">
-                            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/chungwon/${dto.pet_photo}"  alt="Image placeholder" height="210px"></a>
+                            <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/chungwon/${dto.pet_photo}" 
+                             alt="Image placeholder" height="210px" onclick="location.href='chungdetail.do?pet_no=${dto.pet_no }'"></a>
                             <div class="card-body">
                               <h3 class="card-title"><a href="chungdetail.do?pet_no=${dto.pet_no }">${dto.pet_title }</a></h3>
                               <div>작성자 : ${dto.user_id }</div>
@@ -122,7 +127,9 @@
       
       <!--작성하기-->
       <div class="container">
+      		<c:if test="${null ne user.user_id}">
               <input type="button" class="btn btn-success btn-hover-white" value="작성하기" onclick="location.href='chungwriteform.do'"/>
+            </c:if>
       </div>
       <br>
       <!--페이징-->

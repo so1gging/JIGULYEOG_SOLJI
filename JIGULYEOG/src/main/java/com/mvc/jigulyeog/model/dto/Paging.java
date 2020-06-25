@@ -3,7 +3,7 @@ package com.mvc.jigulyeog.model.dto;
 public class Paging {
 	private int page; // 페이지 번호 : 현재 몇 페이지 인지 << [1] [2] [3] [4] [5] >> 이런 식의 페이지 번호를 나타내는 것.
 	private int totalPage; // 페이지 갯수 :  << [1] [2] [3] [4] [5] >> 총 5개의 페이지
-	private int pageSize = 9; // 한 페이지 게시글 개수 : 한 페이지에 출력 될 개시글 개수
+	private int pageSize = 6; // 한 페이지 게시글 개수 : 한 페이지에 출력 될 개시글 개수
 	private int totalArticle; //전체 게시글 개수
 	private int startRow; // 한 페이지에 게시글 시작 행
 	private int endRow; // 한 페이지에 게시글 끝 행

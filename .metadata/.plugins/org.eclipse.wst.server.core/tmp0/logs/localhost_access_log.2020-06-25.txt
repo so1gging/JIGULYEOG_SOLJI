@@ -1,0 +1,17 @@
+127.0.0.1 - - [25/Jun/2020:11:45:40 +0900] "GET / HTTP/1.1" 404 750
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:45:40 +0900] "GET /jigulyeog/index_start.jsp HTTP/1.1" 200 242
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:45:42 +0900] "GET /jigulyeog/index.do HTTP/1.1" 200 18089
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:45:42 +0900] "GET /jigulyeog/resources/upload/images/project/99c4de74 HTTP/1.1" 200 73796
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:45:42 +0900] "GET /jigulyeog/resources/upload/images/project/7fbe2f85 HTTP/1.1" 200 300191
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:45:42 +0900] "GET /jigulyeog/resources/upload/images/chungwon/images.png HTTP/1.1" 200 5122
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:45:42 +0900] "GET /jigulyeog/resources/upload/images/project/d311e442 HTTP/1.1" 200 5122
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:03 +0900] "GET /jigulyeog/together.do HTTP/1.1" 200 10849
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:03 +0900] "GET /jigulyeog/images/bg_2.jpg HTTP/1.1" 404 783
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:08 +0900] "GET /jigulyeog/chunglist.do HTTP/1.1" 200 12979
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:08 +0900] "GET /jigulyeog/resources/images/bg_3.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:09 +0900] "GET /jigulyeog/chungdetail.do?pet_no=1 HTTP/1.1" 200 16317
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:09 +0900] "GET /jigulyeog/resources/upload/images/chungwon/twitter.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:09 +0900] "GET /jigulyeog/resources/upload/images/chungwon/facebook.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:09 +0900] "GET /jigulyeog/resources/upload/images/chungwon/kakaostory.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:09 +0900] "GET /jigulyeog/resources/upload/images/chungwon/naver.png HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [25/Jun/2020:11:46:09 +0900] "GET /jigulyeog/resources/upload/images/chungwon/band.png HTTP/1.1" 304 -
