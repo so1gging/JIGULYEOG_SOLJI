@@ -172,9 +172,9 @@
 					<c:forEach items="${cList }" var="chungwon">
 					
 			            <div class="card fundraise-item">
-			              <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/chungwon/${chungwon.pet_photo}" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder"></a>
+			              <a href="chungdetail.do?pet_no=${chungwon.pet_no }"><img class="card-img-top" src="${pageContext.request.contextPath}/resources/upload/images/chungwon/${chungwon.pet_photo}" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder"></a>
 			              <div class="card-body">
-			                <h3 class="card-title"><a href="#">${chungwon.pet_title }</a></h3>
+			                <h3 class="card-title"><a href="chungdetail.do?pet_no=${chungwon.pet_no }">${chungwon.pet_title }</a></h3>
 			               
 			                  <div>작성자 : ${chungwon.user_id }</div>
                               <div>청원 시작일 : ${chungwon.pet_date }</div>
@@ -290,7 +290,7 @@
       		<c:forEach items="${tList }" var="together">
 		        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0">
 		          <div class="post-entry">
-		            <a href="#" class="mb-3 img-wrap">
+		            <a href="together_detail.do?tog_no=${together.tog_no }" class="mb-3 img-wrap">
 		              <img src="${pageContext.request.contextPath}/resources/upload/images/together/${together.tog_image}" style="width: 270px; height: 300px; margin:0px auto;" alt="Image placeholder" class="img-fluid">
 		              <span class="date">${together.tog_category }</span>
 		            </a>
