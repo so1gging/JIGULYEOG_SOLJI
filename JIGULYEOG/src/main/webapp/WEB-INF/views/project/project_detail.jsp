@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -419,12 +422,16 @@
                         <div class="progress-bar bg-success" role="progressbar" style="width: ${percent }%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <span class="fund-raised d-block" style="font-size:1.2em;"><fmt:formatDate value="${project.pro_start_date}" pattern="yyyy.MM.dd"/> ~ <fmt:formatDate value="${project.pro_due_date}" pattern="yyyy.MM.dd"/>까지</span>                     
-                    
-                      <h5>${project.pro_success }</h5>
-                      
-                      <h4 style="font-weight: 600; text-align: center;" class="m-3"><span style="color: #f86f46;"><fmt:formatNumber value="${project.pro_nowmoney }" pattern="#,###.##"/> 원 </span></h4>
+ 
+                      <h4 style="font-weight: 600; text-align: center;" class="m-3">
+                      <span style="color: #f86f46;"><fmt:formatNumber value="${project.pro_nowmoney }" pattern="#,###.##"/> 원
+                        <c:if test="${fn:contains(project.pro_success, 'S')}">성공 ! </c:if>
+                       </span>
+                      </h4>
 					  
-					  <h4 style="text-align:center; font-size:1em; color:#b3b3b3;"><fmt:formatNumber value="${project.pro_goalmoney }" pattern="#,###.##"/> 원 목표</h4>
+					  <h4 style="text-align:center; font-size:1em; color:#b3b3b3;">
+					  <fmt:formatNumber value="${project.pro_goalmoney }" pattern="#,###.##"/> 원 목표
+					  </h4>
                     <div class="mt-3 mb-2" style="background-color: #f86f46; color: white; width: 50px; text-align: center;">
                         <span style="font-weight: 500;">
                         		D- 
