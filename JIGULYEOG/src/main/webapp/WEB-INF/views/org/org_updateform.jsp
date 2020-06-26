@@ -209,7 +209,7 @@ body {
 				<div class="col-md-6 pr-md-5" style="margin: 0 auto;">
 					<form action="org_updateRes.do" method="POST"
 						enctype="multipart/form-data" id="usercheck">
-						<input type="hidden" name="user_status" id="user_status">
+						<input type="hidden" name="user_status" id="user_status" value="${user.getUser_status() }">
 						<div class="form-group joinbox">
 							<input type="hidden" class="form-control px-3 py-3 join_input"
 								style="width: 500px;" name="user_id" id="user_id"
@@ -269,7 +269,7 @@ body {
 						</div>
 						<div class="form-group">
 							<input type="button" value="취소" class="btn py-3 px-5 cancelbtn"
-								style="width: 500px;" onclick="location.href='org_mypage.do'">
+								style="width: 500px;" onclick="location.href='org_myPage.do'">
 						</div>
 					</form>
 				</div>
