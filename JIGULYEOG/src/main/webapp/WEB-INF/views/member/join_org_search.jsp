@@ -134,8 +134,12 @@ body {
 												<td class="org_name">${org.org_name }</td>
 												<td class="org_addr">${org.org_addr }</td>
 												<td class="org_nick">${org.org_ceo }</td>
-												<td><input type="button" value="선택"
-													class="btn btn-success popBtn"></td>
+												<c:if test="${empty org.org_pic }">
+													<td><input type="button" value="선택" class="btn btn-success popBtn"></td>														
+												</c:if>
+												<c:if test="${!empty org.org_pic }">
+													<td><input type="button" value="선택" class="btn btn-success popBtn" disabled="disabled"></td>														
+												</c:if>												
 											</tr>
 										</c:forEach>
 									</c:otherwise>

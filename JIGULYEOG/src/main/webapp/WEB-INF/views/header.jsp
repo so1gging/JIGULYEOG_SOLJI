@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>지구력</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  </head>
-  <body>
+
   <c:if test="${!empty user }">
   	<c:set value="${user }" var="user"></c:set>
   </c:if>
@@ -38,8 +30,11 @@
 		          		<a class="dropdown-item" href="myPage.do">유저 마이페이지</a>
 		          		<a class="dropdown-item" href="myDonate.do">유저 후원페이지</a>
 		          		<a class="dropdown-item" href="myAction.do">유저 내활동페이지</a>
-		          		<a class="dropdown-item" href="org_myPage.do">단체 마이페이지</a>
-		          		<a class="dropdown-item" href="org_myAction.do">단체 활동페이지</a>
+		          		<a class="dropdown-item" href="dmlist.do">DM목록</a>
+		          		<c:if test="${user.user_status ne 0 }">
+			          		<a class="dropdown-item" href="org_myPage.do">단체 마이페이지</a>
+			          		<a class="dropdown-item" href="org_myAction.do">단체 활동페이지</a>	          		
+		          		</c:if>
 		          		<a class="dropdown-item" href="secession.do">탈퇴페이지</a>
 		          	</div>
           		<li>    
@@ -49,6 +44,3 @@
     </div>
   </nav>
   <!-- END nav -->
-
-  </body>
-</html>

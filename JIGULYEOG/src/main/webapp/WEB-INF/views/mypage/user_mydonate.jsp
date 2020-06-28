@@ -179,6 +179,7 @@ body {
 			<br>
 			<br>
 
+<!--
 			<div class="row">
 				<h1>새소식</h1>
 				<table class="table table-hover">
@@ -239,8 +240,9 @@ body {
 					</tbody>
 				</table>
 			</div>
-
-			<!--페이징-->
+-->
+<!-- 
+			페이징
 			<div style="width: 200px; margin: 0px auto;">
 				<nav aria-label="Page navigation">
 					<ul class="pagination">
@@ -259,10 +261,10 @@ body {
 				</nav>
 
 			</div>
-
+-->	
 		</div>
 	</div>
-
+	
 	<!-- END section -->
 
 

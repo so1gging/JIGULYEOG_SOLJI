@@ -301,7 +301,7 @@ public class ProjectController {
 
         //logger.info("calDateDays"+calDateDays);
         //calDateDays = Math.abs(calDateDays);
-        //logger.info("calDateDays"+(int)calDateDays);
+        logger.info("calDateDays"+Math.abs(calDateDays));
         
         logger.info("D-Day : "+(int)calDateDays);
         model.addAttribute("dday", (int)calDateDays);
